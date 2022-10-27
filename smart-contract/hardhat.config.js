@@ -8,9 +8,9 @@ const POLYGON_MAINNET_RPC_URL = process.env.POLYGON_MAINNET_RPC_URL || "https://
 
 const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL || "https://eth-goerli.alchemyapi.io/v2/your-api-key"
 
-const POLYGON_MUMBAI_RPC_URL = process.env.POLYGON_MUMBAI_RPC_URL || ""
+const POLYGON_MUMBAI_RPC_URL = process.env.POLYGON_MUMBAI_RPC_URL || "https://soft-morning-shard.matic-testnet.discover.quiknode.pro/0492e50bbcc828ab0be06f4f253a199d63742bd3/"
 
-const PRIVATE_KEY = process.env.PRIVATE_KEY || ""
+const PRIVATE_KEY = process.env.PRIVATE_KEY
 
 // optional
 const MNEMONIC = process.env.MNEMONIC || "Your mnemonic"
@@ -38,13 +38,6 @@ module.exports = {
   },
   networks: {
     hardhat: {
-      hardfork: "merge",
-      // If you want to do some forking set `enabled` to true
-      forking: {
-        url: MAINNET_RPC_URL,
-        blockNumber: FORKING_BLOCK_NUMBER,
-        enabled: false,
-      },
       chainId: 31337,
     },
     localhost: {
@@ -87,6 +80,7 @@ module.exports = {
     apiKey: {
       polygon: POLYGONSCAN_API_KEY,
       goerli: ETHERSCAN_API_KEY,
+      polygonMumbai: POLYGONSCAN_API_KEY
     },
   },
   gasReporter: {

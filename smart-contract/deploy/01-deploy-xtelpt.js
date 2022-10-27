@@ -1,4 +1,5 @@
 const hre = require("hardhat");
+const { verify } = require("../utils/verify")
 
 async function main() {
     const [deployer] = await hre.ethers.getSigners();
@@ -10,7 +11,15 @@ async function main() {
     const Xtelpt = await hre.ethers.getContractFactory("XTELPT");
     const xtelpt = await Xtelpt.deploy();
 
+    console.log("----------------------------------------------------")
+
+    const arguments = [
+
+    ]
+
     await xtelpt.deployed();
+
+    await verify(xtelpt.address, arguments)
 
     console.log("Xtelpt address:", xtelpt.address);
 }
