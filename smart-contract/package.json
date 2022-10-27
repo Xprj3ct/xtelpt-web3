@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "deploy": "yarn hardhat run deploy/01-deploy-xtelpt.js",
     "test": "yarn hardhat test",
     "test-staging": "yarn hardhat test --network goerli",
     "lint": "yarn solhint 'contracts/*.sol'",
