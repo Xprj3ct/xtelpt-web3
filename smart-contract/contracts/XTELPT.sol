@@ -70,6 +70,8 @@ contract XTELPT is  KeeperCompatibleInterface {
     struct meeting {
         address host;
         address user;
+        uint256 start;
+        uint256 end;
         uint256 time;
         uint256 fee;
         bool completed;
@@ -176,10 +178,11 @@ contract XTELPT is  KeeperCompatibleInterface {
         
         meeting memory NewMeeting;
         NewMeeting.host = msg.sender;
-        NewMeeting.time = block.timestamp + _time * 60;
+        NewMeeting.time = _time * 60;
+        NewMeeting.start = block.timestamp;
         NewMeeting.fee = _fee;
 
-        i_interval = _time;
+        i_interval = _time * 60;
         s_xtelpState[msg.sender] = XTELPState.OPEN;
 
         Meeting[msg.sender].push(NewMeeting);
@@ -248,9 +251,9 @@ contract XTELPT is  KeeperCompatibleInterface {
         
         for (uint i = 0; i < AllHost.length; i++) {
             for (uint j = 0; j < Meeting[AllHost[i]].length; j++) {
-                if( block.timestamp >= Meeting[AllHost[i]][j].time && Meeting[AllHost[i]][j].completed == false){
+                if(Meeting[AllHost[i]][j].time > 0 && Meeting[AllHost[i]][j].completed == false){
                     bool isOpen = XTELPState.OPEN == s_xtelpState[msg.sender];
-                    bool timePassed = ((block.timestamp - s_lastTimeStamp) >  Meeting[AllHost[i]][j].time);
+                    bool timePassed = ((block.timestamp - Meeting[AllHost[i]][j].start) >  Meeting[AllHost[i]][j].time);
                     upkeepNeeded = (isOpen && timePassed);
                 }
                 
@@ -269,6 +272,7 @@ contract XTELPT is  KeeperCompatibleInterface {
                (bool upkeepNeeded, ) = checkUpkeep("");
                 require(upkeepNeeded, "Doesn't meet requirement for UpKeep");
                 Meeting[AllHost[i]][j].completed = true;
+                Meeting[AllHost[i]][j].end = block.timestamp;
                 s_xtelpState[AllHost[i]] = XTELPState.CLOSED;
             }
         }
