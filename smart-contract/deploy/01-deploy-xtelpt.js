@@ -1,32 +1,36 @@
-const hre = require("hardhat");
+const { getNamedAccounts, deployments, network, run } = require("hardhat")
+const {
+    networkConfig,
+    developmentChains,
+    VERIFICATION_BLOCK_CONFIRMATIONS,
+} = require("../helper-hardhat-config")
 const { verify } = require("../utils/verify")
 
-async function main() {
-    const [deployer] = await hre.ethers.getSigners();
-    const accountBalance = await deployer.getBalance();
+module.exports = async ({ getNamedAccounts, deployments }) => {
+    const { deploy, log } = deployments
+    const { deployer } = await getNamedAccounts()
+    const chainId = network.config.chainId
 
-    console.log("Deploying contracts with account: ", deployer.address);
-    console.log("Account balance: ", accountBalance.toString());
-
-    const Xtelpt = await hre.ethers.getContractFactory("XTELPT");
-    const xtelpt = await Xtelpt.deploy();
-
-    console.log("----------------------------------------------------")
-
+    log("----------------------------------------------------")
     const arguments = [
-
     ]
 
-    await xtelpt.deployed();
+    const xtelpt = await deploy("XTELPT", {
+        from: deployer,
+        args: arguments,
+        log: true,
+        waitConfirmations: network.config.waitBlockConfirmations || 1,
+    })
 
-    await verify(xtelpt.address, arguments)
+    // // Verify the deployment
+    // if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
+    //     log("Verifying...")
+    //     await verify(xtelpt.address, arguments)
+    // }
 
-    console.log("Xtelpt address:", xtelpt.address);
+    const networkName = network.name == "hardhat" ? "localhost" : network.name
+
+    log("----------------------------------------------------")
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-});
+module.exports.tags = ["all", "xtelpt"]
