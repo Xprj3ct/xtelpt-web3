@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+const withTM = require("next-transpile-modules")(["@huddle01/huddle01-client"]);
+
+module.exports = withTM({
   reactStrictMode: true,
   swcMinify: true,
-}
-
-module.exports = nextConfig
+});

@@ -5,6 +5,7 @@ import {
   useRootStore,
 } from "@huddle01/huddle01-client";
 import PeerVideoAudioElem from "./PeerVideoAudioElem";
+import HuddleI from "./Huddle-I";
 
 const HuddleC = () => {
     const huddleClient = getHuddleClient("i4pzqbpxza8vpijQMwZsP1H7nZZEHOTN3vR4NdNS");
@@ -20,9 +21,9 @@ const HuddleC = () => {
   const handleJoin = async () => {
     try {
       await huddleClient.join("dev ", {
-        address: "0x15900c698ee356E6976e5645394F027F0704c8Eb",
-        wallet: "",
-        ens: "axit.eth",
+        // address: "0x15900c698ee356E6976e5645394F027F0704c8Eb",
+        // wallet: "",
+        // ens: "axit.eth",
       });
 
       console.log("joined");
@@ -92,9 +93,11 @@ const HuddleC = () => {
               style={{ width: "50%" }}
               ref={videoRef}
               autoPlay
-              muted
+              // muted
             ></video>
           )}
+
+            {/* <div><HuddleI/></div> */}
 
           {lobbyPeers[0] && <h2>Lobby Peers</h2>}
           <div>

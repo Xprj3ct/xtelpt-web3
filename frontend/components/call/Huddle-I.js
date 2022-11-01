@@ -56,7 +56,7 @@ const HuddleI = () => {
           ))}
       </div>
 
-      <HuddleIframe config={iframeConfig} />
+      {/* <HuddleIframe config={iframeConfig} /> */}
       <br />
       {reactions.map((reaction) => (
         <button

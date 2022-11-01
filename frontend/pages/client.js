@@ -1,10 +1,10 @@
 import React from 'react'
-
+import HuddleC from '../components/call/Huddle-C'
 const client = () => {
   return (
     <div>
-      mena
-        {/* <HuddleC /> */}
+      
+        <HuddleC />
     </div>
   )
 }
