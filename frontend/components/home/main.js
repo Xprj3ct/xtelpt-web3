@@ -14,9 +14,9 @@ const Main = () => {
             
         <Image src={HeroIcon} height={363} width={330} />
         </div>
-        <div className='mt-[75px] w-full  text-center h-[600px] bg-[#D9D9D9] text-[60px]'>
+        <div className='mt-[250px] w-full  text-center h-[450px] bg-[#D9D9D9] text-[60px]'>
             <div className='font-bungee h-[250px] pt-[112px]'>
-                <div className='leading-[250px] mt-[250px]'>BIG CATCHPHRASE</div>
+                <div className='leading-[250px] mt-[100px]'>BIG CATCHPHRASE</div>
             </div>
         </div>
         <div className='text-[#FFFFFF] text-[32px] text-center w-full leading-[250px] font-noto'>X-Stealth-Pronounciation</div>

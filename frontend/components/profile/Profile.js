@@ -5,6 +5,7 @@ import ProfileImage from '../../assets/profle-p.png'
 import { useRouter } from 'next/router'
 
 const Profile = () => {
+  const router = useRouter()
   return (
      <div className='grid place-items-center h-screen w-full'>
             <div className='flex justify-center mb-[67px] w-full '>
