@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import Message from '../components/call/Message';
-import { BsMicFill, BsFillChatLeftFill } from 'react-icons/bs'
+import Search from '../assets/Vector.png'
+import { BsMicFill, BsFillChatLeftFill, BsSearch } from 'react-icons/bs'
+import SearchCampaign from '../components/campaigns/searchCampaign';
 
 const customStyles = {
   overlay: {
@@ -17,10 +19,10 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     padding: 10,
-    height: '630px',
+    width: '326px',
+    height: '338px',
     backgroundColor: '#000000',
     borderRadius: '37px',
-    width: '397px',
     border: 'none',
   },
 };
@@ -43,8 +45,8 @@ const NewModal = () => {
     setIsOpen(false);
   }
   return (
-    <div>
-      <BsFillChatLeftFill className='text-[#ACACAC] h-8 w-8' onClick={openModal} />
+    <div className='flex'>
+      <BsSearch onClick={openModal} height={15} width={15} className='' />
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -54,7 +56,7 @@ const NewModal = () => {
       >
         <div className='flex-1 bg-[#000000]'>
         <div className='text-white sticky top-0' onClick={closeModal}>X</div>
-          <Message />
+         <SearchCampaign />
         </div>
       </Modal>
     </div>

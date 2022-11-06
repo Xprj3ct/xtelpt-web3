@@ -5,6 +5,7 @@ import ProfileImage from '../../assets/profle-p.png'
 import { useRouter } from 'next/router'
 import Ellipse from '../../assets/Ellipse 2.png'
 import { BsPlus } from 'react-icons/bs'
+import NewModal from '../../container/newModal'
 
 const Campaigns = () => {
   const router = useRouter()
@@ -16,7 +17,8 @@ const Campaigns = () => {
             <BsPlus className='text-[#A77300]' />
             <div className='rounded-[12px] w-[154px] leading-[26px] pt-[6px] flex-auto text-[16px] border-[#EAEDEE] pl-[12px] h-[40px] bg-transparent border-[2px]'>
         <input type="search" placeholder='Search' className='bg-transparent font-sans w-[110px] outline-none h-[16px] '/>
-        <Image src={Search} height={15} width={15} className='mt-2' />
+       <div className='-mt-5 ml-28'>
+       <NewModal /></div>
         </div>
         </div>
         </div>
