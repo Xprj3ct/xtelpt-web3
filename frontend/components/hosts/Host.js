@@ -22,7 +22,7 @@ const Host = () => {
         </div>
         <div className='grid place-items-center w-full'>
             <div className='flex px-[265px] w-full justify-between'>
-                <div onClick={ () => router.push('/call') } className='bg-[#2D1300] w-[350px] cursor-pointer h-[250px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
+                <div onClick={ () => router.push('/call/mena') } className='bg-[#2D1300] w-[350px] cursor-pointer h-[250px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
                 <div className='grid place-items-center mt-16 w-full'>
                     <Image src={ProfileImage} height={54} width={55} />
                     <div className='font-bungee text-white'>Amanda Stenberg</div>

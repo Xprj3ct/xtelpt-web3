@@ -23,7 +23,6 @@ export const XProvider = ({ children }) => {
           if (addressArray.length > 0) {
             setAppStatus('connected')
             setCurrentAccount(addressArray[0])
-    
             createUserAccount(addressArray[0])
           } else {
             router.push('/')
