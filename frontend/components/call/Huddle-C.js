@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useContext, useRef, useState } from "react";
+import { XContext } from "../../context/XContext";
 import {
   HuddleClientProvider,
   getHuddleClient,
   useRootStore,
 } from "@huddle01/huddle01-client";
 import PeerVideoAudioElem from "./PeerVideoAudioElem";
+import HuddleI from "./Huddle-I";
 
 const HuddleC = () => {
+  const { connectWallet, appStatus, currentAccount } = useContext(XContext)
     const huddleClient = getHuddleClient("i4pzqbpxza8vpijQMwZsP1H7nZZEHOTN3vR4NdNS");
   const stream = useRootStore((state) => state.stream);
   const enableStream = useRootStore((state) => state.enableStream);
@@ -20,7 +23,7 @@ const HuddleC = () => {
   const handleJoin = async () => {
     try {
       await huddleClient.join("dev ", {
-        address: "0x15900c698ee356E6976e5645394F027F0704c8Eb",
+        address: {currentAccount},
         wallet: "",
         ens: "axit.eth",
       });
@@ -30,6 +33,7 @@ const HuddleC = () => {
       console.log({ error });
     }
   };
+  
 
   const videoRef = useRef(null);
 
@@ -92,9 +96,11 @@ const HuddleC = () => {
               style={{ width: "50%" }}
               ref={videoRef}
               autoPlay
-              muted
+              // muted
             ></video>
           )}
+
+            {/* <div><HuddleI/></div> */}
 
           {lobbyPeers[0] && <h2>Lobby Peers</h2>}
           <div>

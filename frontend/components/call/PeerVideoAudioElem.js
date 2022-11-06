@@ -59,7 +59,7 @@ const PeerVideoAudioElem = ({ peerIdAtIndex }) => {
     <div style={{ width: "50%" }}>
       <video
         ref={videoRef}
-        muted
+        // muted
         autoPlay
         playsInline
         style={{ width: "100%" }}

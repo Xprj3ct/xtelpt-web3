@@ -1,87 +1,123 @@
-import React, { useEffect, useState } from "react";
-import { huddleIframeApp, HuddleIframe } from "@huddle01/huddle01-iframe";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  HuddleClientProvider,
+  getHuddleClient,
+  useRootStore,
+} from "@huddle01/huddle01-client";
+import PeerVideoAudioElem from "./PeerVideoAudioElem";
+
 
 const HuddleI = () => {
-    const [walletAddress, setWalletAddress] = useState("");
+    const huddleClient = getHuddleClient("i4pzqbpxza8vpijQMwZsP1H7nZZEHOTN3vR4NdNS");
+  const stream = useRootStore((state) => state.stream);
+  const enableStream = useRootStore((state) => state.enableStream);
+  const pauseTracks = useRootStore((state) => state.pauseTracks);
+  const isCamPaused = useRootStore((state) => state.isCamPaused);
+  const peers = useRootStore((state) => state.peers);
+  const peerId = useRootStore((state) => state.peerId);
+  const lobbyPeers = useRootStore((state) => state.lobbyPeers);
+  const roomState = useRootStore((state) => state.roomState);
 
-  const iframeConfig = {
-    roomUrl: "https://iframe.huddle01.com/test-room",
-    height: "600px",
-    width: "80%",
+  const handleJoin = async () => {
+    try {
+      await huddleClient.join("mena ", {
+        address: "0x15900c698ee356E6976e5645394F027F0704c8Eb",
+        wallet: "",
+        ens: "axit.eth",
+      });
+
+      console.log("joined");
+    } catch (error) {
+      console.log({ error });
+    }
   };
+  
 
-  const reactions = [
-    "😂",
-    "😢",
-    "😦",
-    "😍",
-    "🤔",
-    "👀",
-    "🙌",
-    "👍",
-    "👎",
-    "🔥",
-    "🍻",
-    "🚀",
-    "🎉",
-    "❤️",
-    "💯",
-  ];
+  const videoRef = useRef(null);
 
   useEffect(() => {
-    huddleIframeApp.on("peer-join", (data) =>
-      console.log({ iframeData: data })
-    );
-    huddleIframeApp.on("peer-left", (data) =>
-      console.log({ iframeData: data })
-    );
-  }, []);
+    if (videoRef.current) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
+
+  useEffect(() => {
+    console.log({ peers: Object.values(peers), peerId, isCamPaused });
+  }, [peers, peerId, isCamPaused]);
+
   return (
-    <div className="App">
-    <div className="container">
-      <div>
-        <br />
+         <HuddleClientProvider value={huddleClient}>
+      <div className="App grid grid-cols-2">
+        <div>
+          <h1>Vite + React</h1>
 
-        {Object.keys(huddleIframeApp.methods)
-          .filter((key) => !["sendReaction", "connectWallet"].includes(key))
-          .map((key) => (
-            <button
-              key={key}
-              onClick={() => {
-                huddleIframeApp.methods[key]();
-              }}
-            >
-              {key}
+          <h2 className={`text-${!roomState.joined ? "red" : "green"}`}>
+            Room Joined:&nbsp;{roomState.joined.toString()}
+          </h2>
+          <h2>Instructions</h2>
+          <ol className="w-fit mx-auto text-left">
+            <li>
+              Click on <b>Enable Stream</b>
+            </li>
+            <li>
+              Then Click on <b>Join room</b>, <i>"Room Joined"</i> should be
+              changed to true
+            </li>
+            <li>
+              Open the app in a <b>new tab</b> and repeat <b>steps 1 & 2</b>
+            </li>
+            <li>Return to 1st tab, now you'll see peers in the peer list,</li>
+            <li>
+              Click on <b>allowAllLobbyPeersToJoinRoom</b> to accept peers into
+              the room.
+            </li>
+          </ol>
+        </div>
+
+        <div>
+          <div className="card">
+            <button onClick={handleJoin}>Join Room</button>
+            <button onClick={() => enableStream()}>Enable Stream</button>
+            <button onClick={() => pauseTracks()}>Disable Stream</button>
+            <button onClick={() => huddleClient.enableWebcam()}>
+              Enable Webcam
             </button>
-          ))}
+            <button onClick={() => huddleClient.disableWebcam()}>
+              Disable Webcam
+            </button>
+            <button onClick={() => huddleClient.allowAllLobbyPeersToJoinRoom()}>
+              allowAllLobbyPeersToJoinRoom()
+            </button>
+          </div>
+          {!isCamPaused && (
+            <video
+              style={{ width: "50%" }}
+              ref={videoRef}
+              autoPlay
+              // muted
+            ></video>
+          )}
+
+            {/* <div><HuddleI/></div> */}
+
+          {lobbyPeers[0] && <h2>Lobby Peers</h2>}
+          <div>
+            {lobbyPeers.map((peer) => (
+              <div>{peer.peerId}</div>
+            ))}
+          </div>
+
+          {Object.values(peers)[0] && <h2>Peers</h2>}
+
+          <div className="peers-grid">
+            {Object.values(peers).map((peer) => (
+              <PeerVideoAudioElem peerIdAtIndex={peer.peerId} />
+            ))}
+          </div>
+        </div>
       </div>
-
-      <HuddleIframe config={iframeConfig} />
-      <br />
-      {reactions.map((reaction) => (
-        <button
-          key={reaction}
-          onClick={() => huddleIframeApp.methods.sendReaction(reaction)}
-        >
-          {reaction}
-        </button>
-      ))}
-
-      <input
-        type="text"
-        value={walletAddress}
-        onChange={(e) => setWalletAddress(e.target.value)}
-        placeholder="Wallet Address"
-      />
-
-      <button
-        onClick={() => huddleIframeApp.methods.connectWallet(walletAddress)}
-      >
-        Connect Wallet
-      </button>
-    </div>
-  </div>
+    </HuddleClientProvider>
   )
 }
- 
+
 export default HuddleI
