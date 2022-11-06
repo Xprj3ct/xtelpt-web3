@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 
 const Host = () => {
   const router = useRouter()
+
   return (
     <div>
     <div className='w-full bg-hero bg-left-4 bg-no-repeat flex-1'>
