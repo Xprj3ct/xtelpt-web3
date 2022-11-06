@@ -121,7 +121,10 @@ contract XTELPT is  KeeperCompatibleInterface {
      * would be set to that of a `User`
      */
     function createUser(uint256 _rating, string memory _name, string memory _pic, string memory _bio) public {
-        AllUser.push(msg.sender);
+         if(UserProfile[msg.sender].addr == address(0)){
+            AllUser.push(msg.sender);
+        }
+        
         UserProfile[msg.sender].addr = msg.sender;
         UserProfile[msg.sender].name = _name;
         UserProfile[msg.sender].rating = _rating;
@@ -136,7 +139,10 @@ contract XTELPT is  KeeperCompatibleInterface {
      * would be set to that of a `Host`
      */
     function createHost(uint256 _rating, string memory _name, string memory _pic, string memory _bio) public {  
-        AllHost.push(msg.sender);
+        if(UserProfile[msg.sender].addr == address(0)){
+            AllHost.push(msg.sender);
+        }
+        
         s_xtelpState[msg.sender] = XTELPState.OPEN;
 
         UserProfile[msg.sender].addr = msg.sender;
@@ -151,13 +157,15 @@ contract XTELPT is  KeeperCompatibleInterface {
      * @dev This function `createVolun` allows only the Host to call it hence the `OnlyHost` modifier
      * A host can toggle being a volunteer for campaign mode on, thereby making the profile avaliable for campaign 
      */
-    function becomeVolun() public onlyHost {
-        AllVolun.push(msg.sender);
+     function becomeVolun() public onlyHost {
+        if(UserProfile[msg.sender].volun == false){
+            AllVolun.push(msg.sender);
+        }
        
         UserProfile[msg.sender].volun = true;
         UserProfile[msg.sender].avaliable = true;
-
     }
+
 
     /**
      * @dev This function `unVolun` allows only the Host to call it hence the `OnlyHost` modifier
@@ -226,8 +234,7 @@ contract XTELPT is  KeeperCompatibleInterface {
 
 
     /**
-     * @dev This function `createCampaign` allows only the User to call it hence the `OnlyUser` modifier
-     * after which any avaliable volunteer would be assigned to the campaign
+     * @dev This function `endCampaign` allows only the User end the campaign
      */
     function endCampaign(address _user, uint256 _id) public onlyUser {
        Campaign[_user][_id].completed = true;

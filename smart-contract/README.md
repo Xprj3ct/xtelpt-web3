@@ -1,126 +1,177 @@
-
 <h1 align="center">
-  <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.png" alt="Markdownify" width="200"></a>
-  <br>
-  Markdownify
-  <br>
+  <a href="https://github.com/ankitwasankar/mftool-java">
+    <img src="https://raw.githubusercontent.com/ankitwasankar/mftool-java/master/src/main/resources/icons/mf-tool-java-new.jpg" alt="mftool-java">
+  </a>
 </h1>
-
-<h4 align="center">A minimal Markdown Editor desktop app built on top of <a href="http://electron.atom.io" target="_blank">Electron</a>.</h4>
-
 <p align="center">
-  <a href="https://badge.fury.io/js/electron-markdownify">
-    <img src="https://badge.fury.io/js/electron-markdownify.svg"
-         alt="Gitter">
-  </a>
-  <a href="https://gitter.im/amitmerchant1990/electron-markdownify"><img src="https://badges.gitter.im/amitmerchant1990/electron-markdownify.svg"></a>
-  <a href="https://saythanks.io/to/bullredeyes@gmail.com">
-      <img src="https://img.shields.io/badge/SayThanks.io-%E2%98%BC-1EAEDB.svg">
-  </a>
-  <a href="https://www.paypal.me/AmitMerchant">
-    <img src="https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&amp;style=flat">
-  </a>
+<a target="_blank" href="https://search.maven.org/artifact/com.webencyclop.core/mftool-java"><img src="https://img.shields.io/maven-central/v/com.webencyclop.core/mftool-java.svg?label=Maven%20Central"/></a> 
+<a target="_blank" href="https://www.codacy.com/gh/ankitwasankar/mftool-java/dashboard?utm_source=github.com&utm_medium=referral&utm_content=ankitwasankar/mftool-java&utm_campaign=Badge_Coverage"><img src="https://app.codacy.com/project/badge/Coverage/0054db87ea0f426599c3a30b39291388" /></a>
+<a href="https://www.codacy.com/gh/ankitwasankar/mftool-java/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ankitwasankar/mftool-java&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/0054db87ea0f426599c3a30b39291388"/></a>
+<a target="_blank" href="https://github.com/ankitwasankar/mftool-java/blob/master/license.md"><img src="https://camo.githubusercontent.com/8298ac0a88a52618cd97ba4cba6f34f63dd224a22031f283b0fec41a892c82cf/68747470733a2f2f696d672e736869656c64732e696f2f707970692f6c2f73656c656e69756d2d776972652e737667" /></a>
+&nbsp <a target="_blank" href="https://www.linkedin.com/in/ankitwasankar/"><img height="20" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+</p>
+<p align="center">
+  This repository contains the <strong>MF TOOL - JAVA</strong> source code.
+  MF TOOL - JAVA is a Java library developed to ease the process of working with Indian Mutual Funds. It's powerful, actively maintained and easy to use.
 </p>
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
+<a href="#introduction">Introduction</a> &nbsp;&bull;&nbsp;
+<a href="#installation">Installation</a> &nbsp;&bull;&nbsp;
+<a href="#usage">Usage</a> &nbsp;&bull;&nbsp;
+<a href="#documentation">Documentation</a> &nbsp;&bull;&nbsp;
+<a href="#issue">Issue?</a>
 </p>
 
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
+# Introduction
+This <b>mf-tool java</b> library provides simple APIs/functions/methods to work with Indian Mutual Funds. You can:
 
-## Key Features
+- Fetch a list of all mutual fund schemes.
+- Fetch a list of matching mutual fund schemes based on provided keywords.
+- Fetch historic or current NAV (Net Asset Value) for a fund.
+- Fetch details for a fund and fund house.
+- Integrate this with any Java project.
 
-* LivePreview - Make changes, See changes
-  - Instantly see what your Markdown documents look like in HTML as you create them.
-* Sync Scrolling
-  - While you type, LivePreview will automatically scroll to the current location you're editing.
-* GitHub Flavored Markdown  
-* Syntax highlighting
-* [KaTeX](https://khan.github.io/KaTeX/) Support
-* Dark/Light mode
-* Toolbar for basic Markdown formatting
-* Supports multiple cursors
-* Save the Markdown preview as PDF
-* Emoji support in preview :tada:
-* App will keep alive in tray for quick usage
-* Full screen mode
-  - Write distraction free.
-* Cross platform
-  - Windows, macOS and Linux ready.
+## Installation
+##### Maven
+```
+<dependency>
+  <groupId>com.webencyclop.core</groupId>
+  <artifactId>mftool-java</artifactId>
+  <version>1.0.4</version>
+</dependency>
+```
+##### Graddle
+```
+implementation 'com.webencyclop.core:mftool-java:1.0.4'
+```
+For other dependency management tool, please visit
+<a href="https://search.maven.org/artifact/com.webencyclop.core/mftool-java">https://search.maven.org/artifact/com.webencyclop.core/mftool-java</a>
 
-## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+## Usage
+Sample code that shows how to use the library:<br/>
+```
+MFTool tool = new MFTool();
+tool.matchingScheme("Axis");   //-- get a list of all schemes with Axis in its name
+tool.getCurrentNav("120503");  //-- get current nav
+```
+The other available methods are described in the next section.
 
-```bash
-# Clone this repository
-$ git clone https://github.com/amitmerchant1990/electron-markdownify
+## Documentation
+Multiple methods provide ways to work with mutual funds and related data. Those are listed below in detail.
 
-# Go into the repository
-$ cd electron-markdownify
+### 1. How to initialize an MFTool object
+```
+MFTool tool = new MFTool();
+```
+This will create the object for you, but it's recommended that you create this object as a <b>singleton</b> object.
+The object uses a caching mechanism, which under-the-hood caches the values of historic nav and other static information to improve the performance. 
+<br/>If you are using the Spring project, you can create the bean in ``@Configuration`` configuration class.
+```
+@Configuration
+public class MFToolConfig{
+    @Bean
+    public MFTool initializeMfTool() {
+        MFTool tool = new MFTool();
+        return tool;
+    }
+}
+```
+You can use MFTool in other services using ``@Inject`` or ``@autowired`` annotation.
+```
+@Service
+public class MyService {
+    
+    @Autowired
+    private MFTool tool;
 
-# Install dependencies
-$ npm install
-
-# Run the app
-$ npm start
+    public void getCurrentNav(String scheme) {
+        BigDecimal nav = tool.getCurrentNav(scheme);
+    }
+}
 ```
 
-> **Note**
-> If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
+### 2. How to fetch a list of all mutual fund schemes
+```
+@Service
+public class MyService {
+    
+    @Autowired
+    private MFTool tool;
+
+    public List<SchemeNameCodePair> fetchListOfAllMutualFundSchemes() {
+        List<SchemeNameCodePair> list = tool.allSchemes();
+    }
+}
+```
+
+### 3. How to fetch a list of all schemes matching a keyword
+```
+@Service
+public class MyService {
+    
+    @Autowired
+    private MFTool tool;
+
+    public List<SchemeNameCodePair> getCurrentNav(String schemeCode) {
+        List<SchemeNameCodePair> list = tool.matchingScheme("Axis"); 
+        // This will fetch MF schemes that have "Axis" in the name.
+    }
+}
+```
+
+### 4. Current NAV for the mutual fund scheme
+An example schemeCode is 120503 (_Axis Long Term Equity Fund - Direct Plan - Growth Option_).<br/>
+When we fetch a list of mutual funds, we get the scheme-name, and its corresponding schemeCode.<br/>
+<b>A scheme code uniquely identifies the mutual fund scheme.</b>
+```
+@Service
+public class MyService {
+    
+    @Autowired
+    private MFTool tool;
+
+    public List<SchemeNameCodePair> fetchListSchemes(String schemeCode) {
+        BigDecimal nav = tool.getCurrentNav(schemeCode);
+    }
+}
+```
+
+### 5. NAV on specific date for the scheme
+LocalDate is used to define the date. For example:<br/>
+``LocalDate date = LocalDate.parse("2021-07-13");``
+```
+@Service
+public class MyService {
+    
+    @Autowired
+    private MFTool tool;
+
+    public List<SchemeNameCodePair> getNavOnDate(String schemeCode, LocalDate date) {
+        BigDecimal nav = tool.getNavFor("120503", date);
+    }
+}
+```
+
+### 6. List of historic NAV for the scheme
+This method provides a list of all the NAVs for the given scheme.
+```
+@Service
+public class MyService {
+    
+    @Autowired
+    private MFTool tool;
+
+    public List<SchemeNameCodePair> getNavOnDate(String schemeCode) {
+        List<Data> list = tool.historicNavForScheme(schemeCode);
+    }
+}
+```
 
 
-## Download
+## Issue
+This repository is maintained actively, so if you face any issue please <a href="https://github.com/ankitwasankar/mftool-java/issues/new">raise an issue</a>.
 
-You can [download](https://github.com/amitmerchant1990/electron-markdownify/releases/tag/v1.2.0) the latest installable version of Markdownify for Windows, macOS and Linux.
-
-## Emailware
-
-Markdownify is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <bullredeyes@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
-
-## Credits
-
-This software uses the following open source packages:
-
-- [Electron](http://electron.atom.io/)
-- [Node.js](https://nodejs.org/)
-- [Marked - a markdown parser](https://github.com/chjj/marked)
-- [showdown](http://showdownjs.github.io/showdown/)
-- [CodeMirror](http://codemirror.net/)
-- Emojis are taken from [here](https://github.com/arvida/emoji-cheat-sheet.com)
-- [highlight.js](https://highlightjs.org/)
-
-## Related
-
-[markdownify-web](https://github.com/amitmerchant1990/markdownify-web) - Web version of Markdownify
-
-## Support
-
-<a href="https://www.buymeacoffee.com/5Zn8Xh3l9" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
-<p>Or</p> 
-
-<a href="https://www.patreon.com/amitmerchant">
-	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
-</a>
-
-## You may also like...
-
-- [Pomolectron](https://github.com/amitmerchant1990/pomolectron) - A pomodoro app
-- [Correo](https://github.com/amitmerchant1990/correo) - A menubar/taskbar Gmail App for Windows and macOS
-
-## License
-
-MIT
-
----
-
-> [amitmerchant.com](https://www.amitmerchant.com) &nbsp;&middot;&nbsp;
-> GitHub [@amitmerchant1990](https://github.com/amitmerchant1990) &nbsp;&middot;&nbsp;
-> Twitter [@amit_merchant](https://twitter.com/amit_merchant)
+<h4>Liked the work ?</h4>
+Give the repository a star :-)
