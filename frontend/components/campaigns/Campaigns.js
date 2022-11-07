@@ -10,7 +10,8 @@ import { XContext } from '../../context/XContext'
 
 const Campaigns = () => {
   const router = useRouter()
-  const { xtelptAddress } = useContext(XContext)
+  const { xtelptAddress, me } = useContext(XContext)
+  console.log(me)
 
   const [campaign, setCampaign] = useState()
 
@@ -18,7 +19,7 @@ const Campaigns = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const xtelptContract = new ethers.Contract(xtelptAddress, abi, provider)
 
-    const allCampaign = await xtelptContract.getAllCampaign()
+    const allCampaign = await xtelptContract.getCampaign()
 
     console.log(allCampaign)
 
@@ -58,8 +59,8 @@ const Campaigns = () => {
             <div className='bg-[#2D1300] w-[600px] h-[400px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
               <div className='grid place-items-center mt-16 w-full'>
                 <Image src={ProfileImage} height={150} width={142.67} />
-                <div className='font-bungee text-[24px] mt-2 text-white'>lgbtq+ issues</div>
-                <div className='font-noto font-semibold text-[#817C7C] leading-[14px] mt-4 text-[32px]'>{item?.user.slice(0, 9)}...</div>
+                <div className='font-bungee text-[24px] mt-2 text-white'>{item?.name}</div>
+                <div className='font-noto font-semibold text-[#817C7C] leading-[14px] mt-4 text-[32px]'>{item?.desc}.</div>
                 <div className='flex items-center w-full justify-center mt-[42px]'>
                   <div onClick={() => router.push('/call')} className='flex text-white cursor-pointer font-noto rounded-[10px] h-[40px] w-[114px] text-center font-semibold bg-[#A77300] mt-[10px] py-2 pl-[16px] text-[16px]'>
                     Get Help
@@ -67,7 +68,7 @@ const Campaigns = () => {
                   {/* <div className='text-right flex'>Voluteer</div> */}
                 </div>
               </div>
-              {item?.role == "Host" && (
+              {me?.role == "Host" && (
                 <div className='flex -mt-[40px] pr-12 w-full'>
                   <div className='text-right text-[#817C7C] text-[14px] ml-auto' onClick={handleVolun}>Voluteer</div>
                 </div>

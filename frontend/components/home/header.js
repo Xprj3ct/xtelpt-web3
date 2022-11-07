@@ -9,31 +9,31 @@ import Connected from './connected';
 
 const Nocon = (
   <div >
-      <div onClick={() => connectWallet()} className='bg-[#A77300] text-[12px] font-noto cursor-pointer font-semibold py-3 mt-[57px] w-[120px] h-[40px] text-center rounded-[30px]'>CONNECT WALLET</div>
+    <div onClick={() => connectWallet()} className='bg-[#A77300] text-[12px] font-noto cursor-pointer font-semibold py-3 mt-[57px] w-[120px] h-[40px] text-center rounded-[30px]'>CONNECT WALLET</div>
   </div>
 )
 
 const Con = (
   <div >
-  <div onClick={() => connectWallet()} className='bg-[#A77300] text-[12px] font-noto cursor-pointer font-semibold py-3 mt-[57px] w-[120px] h-[40px] text-center rounded-[30px]'>mena</div>
-</div>
+    <div onClick={() => connectWallet()} className='bg-[#A77300] text-[12px] font-noto cursor-pointer font-semibold py-3 mt-[57px] w-[120px] h-[40px] text-center rounded-[30px]'>mena</div>
+  </div>
 )
 
 const Header = () => {
-  const { connectWallet, appStatus, currentAccount } = useContext(XContext)
+  const { connectWallet, appStatus, currentAccount, me } = useContext(XContext)
   const router = useRouter()
   const user = 'Efemena'
   return (
-      <div>
-        {currentAccount? (
-           <Connected /> 
-        ):(
-          <Notconnected/>
-        ) }
-        </div>
+    <div>
+      {currentAccount ? (
+        <Connected />
+      ) : (
+        <Notconnected />
+      )}
+    </div>
 
   )
-  }
- 
+}
+
 
 export default Header

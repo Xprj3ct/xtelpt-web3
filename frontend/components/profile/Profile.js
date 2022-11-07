@@ -9,36 +9,8 @@ import { ethers } from 'ethers'
 import { abi } from '../../constants'
 
 const Profile = () => {
-  const { connectWallet, appStatus, currentAccount, xtelptAddress } = useContext(XContext)
+  const { currentAccount, me } = useContext(XContext)
   const router = useRouter()
-
-  const [me, setMe] = useState()
-
-  const updateUIValues = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const xtelptContract = new ethers.Contract(xtelptAddress, abi, provider)
-
-    try {
-      const addressArray = await window.ethereum.request({
-        method: 'eth_accounts',
-      })
-      if (addressArray.length > 0) {
-        let prof = await xtelptContract.getProfile(`${addressArray[0]}`)
-        setMe(prof)
-      } else {
-        console.log("no metamask")
-      }
-    } catch (err) {
-      console.log("an error occured")
-    }
-
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      updateUIValues()
-    }, 1000);
-  }, [])
 
 
   return (

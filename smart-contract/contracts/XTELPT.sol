@@ -13,6 +13,7 @@ interface KeeperCompatibleInterface {
 }
 
 contract XTELPT is  KeeperCompatibleInterface {
+    address owner;
 
     enum XTELPState {
         OPEN,
@@ -34,9 +35,10 @@ contract XTELPT is  KeeperCompatibleInterface {
 
     /* Campaign and Meeting variables */
 
-    mapping(address => campaign[]) public Campaign;
-
     mapping(address => meeting[]) public Meeting;
+
+    campaign [] public Campaign;
+
 
     uint256 public campaignIndex;
     
@@ -72,25 +74,32 @@ contract XTELPT is  KeeperCompatibleInterface {
         address user;
         uint256 start;
         uint256 end;
+        string desc;
         uint256 time;
         uint256 fee;
+        uint256 index;
         bool completed;
     }
 
 
     struct campaign {
-        address volunteer;
+        address [] volunteer;
         address user;
         uint256 start_time;
         uint256 end_time;
         uint256 fee;
+        uint256 index;
         bool completed;
+        string name;
+        string desc;
     }
 
-    campaign [] public AllCampaign;
-
-
     /* Modifiers */
+    modifier onlyOwner  {
+        require(msg.sender == owner);
+        _;
+    }
+   
     modifier onlyHost  {
         require(keccak256(abi.encodePacked(UserProfile[msg.sender].role)) == keccak256(abi.encodePacked("Host")), "NOT A HOST");
         _;
@@ -117,6 +126,8 @@ contract XTELPT is  KeeperCompatibleInterface {
         v_lastTimeStamp = block.timestamp;
         s_xtelpState[msg.sender] = XTELPState.OPEN;
         volunState[msg.sender] = XTELPState.OPEN;
+
+        owner =  msg.sender;
     }
 
 
@@ -182,21 +193,20 @@ contract XTELPT is  KeeperCompatibleInterface {
      * @dev This function `createSchedule` allows only the Host to call it hence the `OnlyHost` modifier
      * after which a Host can create a meeting with some parameters like time and fee needed
      */
-    function createSchedule(uint256 _time, uint256 _fee) public onlyHost {
-        meetingIndex ++;
-        
-
+    function createSchedule(uint256 _time, uint256 _fee, string memory _desc) public onlyHost {
+       
         meeting memory NewMeeting;
         NewMeeting.host = msg.sender;
         NewMeeting.time = _time * 60;
+        NewMeeting.desc = _desc;
         NewMeeting.start = block.timestamp;
+        NewMeeting.index =  meetingIndex;
         NewMeeting.fee = _fee;
 
         i_interval = _time * 60;
         s_xtelpState[msg.sender] = XTELPState.OPEN;
-
         Meeting[msg.sender].push(NewMeeting);
-      
+        meetingIndex ++;
     }
 
     /**
@@ -211,41 +221,50 @@ contract XTELPT is  KeeperCompatibleInterface {
      * @dev This function `createCampaign` allows only the User to call it hence the `OnlyUser` modifier
      * after which any avaliable volunteer would be assigned to the campaign
      */
-    function createCampaign() public onlyUser {
-        campaignIndex ++;
-
+    function createCampaign(string memory _name, string memory _desc) public onlyOwner {
+        
         campaign memory NewCampaign;
-        NewCampaign.user = msg.sender;
         NewCampaign.start_time = block.timestamp;
+        NewCampaign.name = _name;
+        NewCampaign.index = campaignIndex;
+        NewCampaign.desc = _desc;
         NewCampaign.fee = 0;
 
         i_interval = 1;
         s_xtelpState[msg.sender] = XTELPState.OPEN;
 
-        for(uint i = 0; i < AllAccount.length; i++){
-            if(UserProfile[AllAccount[i]].avaliable == true){
-                NewCampaign.volunteer = AllAccount[i];
-                UserProfile[AllAccount[i]].avaliable = false;
-                break;
-            }
-        }
-
-        Campaign[msg.sender].push(NewCampaign);
-        AllCampaign.push(NewCampaign);
+        Campaign.push(NewCampaign);
+        
+        campaignIndex ++;
       
     }
+
+    /**
+     * @dev This function `getHelo` allows only the User to call it hence the `OnlyUser` modifier
+     * after which the Campaign ID is specified and the user would be assigned to the Campaign
+     */
+    function getHelp(uint256 _id) public onlyUser {
+        Campaign[_id].user = msg.sender;
+    } 
+
+    /**
+     * @dev This function `joinCampaign` allows only the User to call it hence the `onlyHost` modifier
+     * after which the Campaign ID is specified and the user would be assigned to the Campaign
+     */
+    function joinCampaign(uint256 _id) public onlyVolun {
+        Campaign[_id].volunteer.push(msg.sender);
+    } 
+    
 
 
     /**
      * @dev This function `endCampaign` allows only the User end the campaign
      */
-    function endCampaign(address _user, uint256 _id) public onlyUser {
-       Campaign[_user][_id].completed = true;
-       Campaign[_user][_id].end_time = block.timestamp;
+    function endCampaign(uint256 _id) public onlyUser {
+       Campaign[_id].completed = true;
+       Campaign[_id].end_time = block.timestamp;
     }
 
-
-      
 
 
     /**
@@ -305,11 +324,7 @@ contract XTELPT is  KeeperCompatibleInterface {
     function getMeeting(address _prof) public view returns (meeting [] memory) {
         return Meeting[_prof];
     }
-    
-    function getCampaign(address _prof) public view returns (campaign [] memory) {
-        return Campaign[_prof];
-    }
-    
+      
 
     function getProfile(address userAdd) public view returns (profile memory) {
         return UserProfile[userAdd];
@@ -319,10 +334,9 @@ contract XTELPT is  KeeperCompatibleInterface {
         return AllAccount;
     }
 
-    function getAllCampaign() public view returns (campaign [] memory) {
-        return AllCampaign;
+    function getCampaign() public view returns (campaign [] memory) {
+        return Campaign;
     }
     
-
    
 }
