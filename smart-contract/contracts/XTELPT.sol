@@ -1,3 +1,7 @@
+/**
+ *Submitted for verification at polygonscan.com on 2022-11-04
+*/
+
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.7;
@@ -46,11 +50,7 @@ contract XTELPT is  KeeperCompatibleInterface {
     mapping(address => XTELPState) private volunState;
 
     /* User Types Arrays */
-    address [] public AllHost;
-
-    address [] public AllVolun;
-    
-    address [] public AllUser;
+    address [] public AllAccount;
 
     address [] public recentCampaignCreator;
 
@@ -76,7 +76,8 @@ contract XTELPT is  KeeperCompatibleInterface {
         uint256 fee;
         bool completed;
     }
-    
+
+
     struct campaign {
         address volunteer;
         address user;
@@ -85,6 +86,9 @@ contract XTELPT is  KeeperCompatibleInterface {
         uint256 fee;
         bool completed;
     }
+
+    campaign [] public AllCampaign;
+
 
     /* Modifiers */
     modifier onlyHost  {
@@ -122,7 +126,7 @@ contract XTELPT is  KeeperCompatibleInterface {
      */
     function createUser(uint256 _rating, string memory _name, string memory _pic, string memory _bio) public {
          if(UserProfile[msg.sender].addr == address(0)){
-            AllUser.push(msg.sender);
+            AllAccount.push(msg.sender);
         }
         
         UserProfile[msg.sender].addr = msg.sender;
@@ -140,7 +144,7 @@ contract XTELPT is  KeeperCompatibleInterface {
      */
     function createHost(uint256 _rating, string memory _name, string memory _pic, string memory _bio) public {  
         if(UserProfile[msg.sender].addr == address(0)){
-            AllHost.push(msg.sender);
+            AllAccount.push(msg.sender);
         }
         
         s_xtelpState[msg.sender] = XTELPState.OPEN;
@@ -158,9 +162,6 @@ contract XTELPT is  KeeperCompatibleInterface {
      * A host can toggle being a volunteer for campaign mode on, thereby making the profile avaliable for campaign 
      */
      function becomeVolun() public onlyHost {
-        if(UserProfile[msg.sender].volun == false){
-            AllVolun.push(msg.sender);
-        }
        
         UserProfile[msg.sender].volun = true;
         UserProfile[msg.sender].avaliable = true;
@@ -184,6 +185,7 @@ contract XTELPT is  KeeperCompatibleInterface {
     function createSchedule(uint256 _time, uint256 _fee) public onlyHost {
         meetingIndex ++;
         
+
         meeting memory NewMeeting;
         NewMeeting.host = msg.sender;
         NewMeeting.time = _time * 60;
@@ -220,15 +222,16 @@ contract XTELPT is  KeeperCompatibleInterface {
         i_interval = 1;
         s_xtelpState[msg.sender] = XTELPState.OPEN;
 
-        for(uint i = 0; i < AllVolun.length; i++){
-            if(UserProfile[AllVolun[i]].avaliable == true){
-                NewCampaign.volunteer = AllVolun[i];
-                UserProfile[AllVolun[i]].avaliable = false;
+        for(uint i = 0; i < AllAccount.length; i++){
+            if(UserProfile[AllAccount[i]].avaliable == true){
+                NewCampaign.volunteer = AllAccount[i];
+                UserProfile[AllAccount[i]].avaliable = false;
                 break;
             }
         }
 
         Campaign[msg.sender].push(NewCampaign);
+        AllCampaign.push(NewCampaign);
       
     }
 
@@ -256,11 +259,11 @@ contract XTELPT is  KeeperCompatibleInterface {
    function checkUpkeep(bytes memory /* checkData */) public view override returns ( bool upkeepNeeded,
     bytes memory /* performData */  ) {
         
-        for (uint i = 0; i < AllHost.length; i++) {
-            for (uint j = 0; j < Meeting[AllHost[i]].length; j++) {
-                if(Meeting[AllHost[i]][j].time > 0 && Meeting[AllHost[i]][j].completed == false){
+        for (uint i = 0; i < AllAccount.length; i++) {
+            for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) {
+                if(Meeting[AllAccount[i]][j].time > 0 && Meeting[AllAccount[i]][j].completed == false){
                     bool isOpen = XTELPState.OPEN == s_xtelpState[msg.sender];
-                    bool timePassed = ((block.timestamp - Meeting[AllHost[i]][j].start) >  Meeting[AllHost[i]][j].time);
+                    bool timePassed = ((block.timestamp - Meeting[AllAccount[i]][j].start) >  Meeting[AllAccount[i]][j].time);
                     upkeepNeeded = (isOpen && timePassed);
                 }
                 
@@ -274,13 +277,13 @@ contract XTELPT is  KeeperCompatibleInterface {
      */
     function performUpkeep(bytes calldata /*performData*/) external override {
 
-        for (uint i = 0; i < AllHost.length; i++) {
-            for (uint j = 0; j < Meeting[AllHost[i]].length; j++) {
+        for (uint i = 0; i < AllAccount.length; i++) {
+            for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) {
                (bool upkeepNeeded, ) = checkUpkeep("");
                 require(upkeepNeeded, "Doesn't meet requirement for UpKeep");
-                Meeting[AllHost[i]][j].completed = true;
-                Meeting[AllHost[i]][j].end = block.timestamp;
-                s_xtelpState[AllHost[i]] = XTELPState.CLOSED;
+                Meeting[AllAccount[i]][j].completed = true;
+                Meeting[AllAccount[i]][j].end = block.timestamp;
+                s_xtelpState[AllAccount[i]] = XTELPState.CLOSED;
             }
         }
         
@@ -312,17 +315,14 @@ contract XTELPT is  KeeperCompatibleInterface {
         return UserProfile[userAdd];
     }
 
-    function getAllHost() public view returns (address [] memory) {
-        return AllHost;
+    function getAllAccount() public view returns (address [] memory) {
+        return AllAccount;
+    }
+
+    function getAllCampaign() public view returns (campaign [] memory) {
+        return AllCampaign;
     }
     
-    function getAllUser() public view returns (address [] memory) {
-        return AllUser;
-    }
-    
-    function getAllVolun() public view returns (address [] memory) {
-        return AllVolun;
-    }
 
    
 }

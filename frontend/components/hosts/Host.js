@@ -13,20 +13,23 @@ const Host = () => {
   const [host, setHost] = useState()
   const [text, setText] = useState("")
 
-  const xtelptAddress = "0x25f2aebcbb530579354fa7b46413f65a6B6Fdb7B"
+  const xtelptAddress = "0x2e60513162fa4c9a324396b98ed0141e66138da0"
 
 
   const updateUIValues = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const xtelptContract = new ethers.Contract(xtelptAddress, abi, provider)
 
-    const allHost = await xtelptContract.getAllHost()
+    const allHost = await xtelptContract.getAllAccount()
+    console.log(allHost)
 
     let arr = []
 
     for (let i = 0; i < allHost.length; i++) {
       let prof = await xtelptContract.getProfile(allHost[i])
-      arr.push(prof)
+      if (prof.role == "Host") {
+        arr.push(prof)
+      }
     }
 
     if (arr.length > 0) {
@@ -46,9 +49,10 @@ const Host = () => {
   }
 
   useEffect(() => {
-
-    updateUIValues()
-  })
+    setTimeout(() => {
+      updateUIValues()
+    }, 1000);
+  }, [])
 
   return (
     <div>
@@ -65,7 +69,7 @@ const Host = () => {
         <div className='grid place-items-center w-full'>
           <div className='flex px-[265px] w-full justify-between pb-40'>
             {host?.map((item) => (
-              <div onClick={() => router.push('/call/mena')} className='bg-[#2D1300] w-[350px] cursor-pointer h-[250px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
+              <div key={item.addr} onClick={() => router.push('/call/mena')} className='bg-[#2D1300] w-[350px] cursor-pointer h-[250px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
                 <div className='grid place-items-center mt-10 w-full'>
                   <Image src={`https://gateway.pinata.cloud/ipfs/${item.profilePic}`} className="rounded-full" height={70} width={70} />
                   <div className='font-bungee text-white mt-4'>{item.name}</div>
