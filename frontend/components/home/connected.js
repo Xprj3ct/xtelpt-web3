@@ -23,7 +23,7 @@ return (
         <div onClick={() => router.push('/iframe')} className='mr-[20px] cursor-pointer leading-[10px] '>FAQ</div>
     </div> 
     <div >
-    <div onClick={() => router.push('/profile')} className='bg-[#A77300] flex  px-3 font-noto cursor-pointer font-semibold  mt-[57px] w-[120px] h-[40px] text-center rounded-[30px]'>
+    <div onClick={() => router.push('/profile')} className='bg-[#A77300] flex py-1  px-3 font-noto cursor-pointer font-semibold  mt-[57px] w-[120px] h-[40px] text-center rounded-[30px]'>
         <Image src={ProfileP} height={24} width={24} />
         <div className='text-[12px] flex-1'>
             <div>Jerry</div>

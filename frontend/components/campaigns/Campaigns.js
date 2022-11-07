@@ -37,7 +37,7 @@ const Campaigns = () => {
                   </div>
                     </div>
                     <div className='flex -mt-[40px] pr-12 w-full'>
-                  <div className='text-right text-[#817C7C] text-[14px] ml-auto'>Voluteer</div>
+                  <div className='text-right text-[#817C7C] cursor-pointer text-[14px] ml-auto'>Voluteer</div>
                   </div>
                 </div>
                 </div>
@@ -55,7 +55,7 @@ const Campaigns = () => {
                   </div>
                     </div>
                     <div className='flex -mt-[40px] pr-12 w-full'>
-                  <div className='text-right text-[#817C7C] text-[14px] ml-auto'>Voluteer</div>
+                  <div className='text-right text-[#817C7C] cursor-pointer text-[14px] ml-auto'>Voluteer</div>
                   </div>
                 </div>
                 </div>
