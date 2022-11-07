@@ -28,8 +28,9 @@ const Profile = () => {
                     </div>: null }
                     <div className='font-noto text-[10px] mt-1 text-[#817C7C]'>humanitarian and blablabla</div>
                     <div className='flex items-center w-full justify-center mt-[8px]'>
-                    <div onClick={() => router.push('/call')} className='flex cursor-pointer font-noto rounded-[10px] h-[40px] w-[125px] text-center font-medium bg-[#A77300] mt-[10px] py-2 pl-1 text-[16px]'>
-                    <div className='text-white text-[16px]'>Add Schedule</div>
+                    <div onClick={() => router.push('/schedule')} className='flex cursor-pointer font-noto rounded-[10px] h-15 w-50 text-center font-medium mb-5 bg-[#A77300] mt-[10px] p-2'>
+                    <div className=' justify-center text-white text-15'>Add Schedule</div>
+
                     </div>
                    
                   </div>
