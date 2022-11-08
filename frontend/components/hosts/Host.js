@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
-import ProfileImage from '../../assets/2.png'
 import Ellipse from '../../assets/Ellipse 2.png'
 import Search from '../../assets/Vector.png'
 import { useRouter } from 'next/router'
-import { abi } from '../../constants'
 import { ethers } from 'ethers'
+import { XContext } from '../../context/XContext'
 
 const Host = () => {
   const router = useRouter()
 
+  const { xtelptAddress, abi } = useContext(XContext)
+
   const [host, setHost] = useState()
   const [text, setText] = useState("")
-
-  const xtelptAddress = "0x2e60513162fa4c9a324396b98ed0141e66138da0"
-
 
   const updateUIValues = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -62,7 +60,7 @@ const Host = () => {
           <div className='mt-[100px] mr-[204px]'>
             <div className='rounded-[12px] w-[154px] leading-[26px] pt-[6px] flex-auto text-[16px] border-[#EAEDEE] pl-[12px] h-[40px] bg-transparent border-[2px]'>
               <input type="search" placeholder='Search' className='bg-transparent font-sans w-[110px] outline-none h-[16px] ' />
-              <Image src={Search} height={15} width={15} className='mt-2' />
+              <Image src={Search} height={15} width={15} className='mt-2 cursor-pointer' />
             </div>
           </div>
         </div>

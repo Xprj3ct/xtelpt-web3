@@ -18,7 +18,7 @@ const Connected = () => {
                 </div>
                 <div className='flex pt-[72px] font-noto text-[16px] text-white'>
                     <div onClick={() => router.push('/campaigns')} className='mr-[20px] cursor-pointer leading-[10px] '>CAMPAIGNS</div>
-                    <div onClick={() => router.push('/auth')} className='mr-[20px] cursor-pointer leading-[10px] '>HOSTS</div>
+                    <div onClick={() => router.push('/host')} className='mr-[20px] cursor-pointer leading-[10px] '>HOSTS</div>
                     <div className='mr-[20px] cursor-pointer leading-[10px] '><NewCampaign /></div>
                     <div onClick={() => router.push('/iframe')} className='mr-[20px] cursor-pointer leading-[10px] '>FAQ</div>
                 </div>

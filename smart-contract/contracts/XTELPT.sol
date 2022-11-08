@@ -65,8 +65,7 @@ contract XTELPT is  KeeperCompatibleInterface {
         uint256 rating;
         string bio;
         string profilePic;
-        bool avaliable;
-        bool volun;
+        string hostTitle;
     }
 
     struct meeting {
@@ -79,6 +78,7 @@ contract XTELPT is  KeeperCompatibleInterface {
         uint256 fee;
         uint256 index;
         bool completed;
+        bool booked;
     }
 
 
@@ -105,10 +105,6 @@ contract XTELPT is  KeeperCompatibleInterface {
         _;
     }
    
-    modifier onlyVolun  {
-        require(keccak256(abi.encodePacked(UserProfile[msg.sender].role)) == keccak256(abi.encodePacked("Host")) && UserProfile[msg.sender].avaliable == true , "NOT A VOLUNTEER");
-        _;
-    }
 
     modifier onlyUser  {
         require(keccak256(abi.encodePacked(UserProfile[msg.sender].role)) == keccak256(abi.encodePacked("User")), "NOT A USER");
@@ -153,7 +149,7 @@ contract XTELPT is  KeeperCompatibleInterface {
      * @dev This function `createHost` any body can call this functions and the senders profile
      * would be set to that of a `Host`
      */
-    function createHost(uint256 _rating, string memory _name, string memory _pic, string memory _bio) public {  
+    function createHost(uint256 _rating, string memory _name, string memory _pic, string memory _bio, string memory _title) public {  
         if(UserProfile[msg.sender].addr == address(0)){
             AllAccount.push(msg.sender);
         }
@@ -162,33 +158,14 @@ contract XTELPT is  KeeperCompatibleInterface {
 
         UserProfile[msg.sender].addr = msg.sender;
         UserProfile[msg.sender].name = _name;
+        UserProfile[msg.sender].hostTitle = _title;
         UserProfile[msg.sender].rating = _rating;
         UserProfile[msg.sender].role = hostType;
         UserProfile[msg.sender].profilePic = _pic;
         UserProfile[msg.sender].bio = _bio;
     }
 
-     /**
-     * @dev This function `createVolun` allows only the Host to call it hence the `OnlyHost` modifier
-     * A host can toggle being a volunteer for campaign mode on, thereby making the profile avaliable for campaign 
-     */
-     function becomeVolun() public onlyHost {
-       
-        UserProfile[msg.sender].volun = true;
-        UserProfile[msg.sender].avaliable = true;
-    }
-
-
-    /**
-     * @dev This function `unVolun` allows only the Host to call it hence the `OnlyHost` modifier
-     * A host can toggle being a volunteer for campaign mode off, thereby making the profile unavaliable for campaign 
-     */
-    function unVolun() public onlyHost {       
-        UserProfile[msg.sender].volun = false;
-        UserProfile[msg.sender].avaliable = false;
-
-    }
-
+   
     /**
      * @dev This function `createSchedule` allows only the Host to call it hence the `OnlyHost` modifier
      * after which a Host can create a meeting with some parameters like time and fee needed
@@ -215,6 +192,7 @@ contract XTELPT is  KeeperCompatibleInterface {
      */
     function joinMeeting(address _host, uint256 _id) public onlyUser {
         Meeting[_host][_id].user = msg.sender;
+        Meeting[_host][_id].booked = true;
     } 
 
     /**
@@ -251,7 +229,7 @@ contract XTELPT is  KeeperCompatibleInterface {
      * @dev This function `joinCampaign` allows only the User to call it hence the `onlyHost` modifier
      * after which the Campaign ID is specified and the user would be assigned to the Campaign
      */
-    function joinCampaign(uint256 _id) public onlyVolun {
+    function joinCampaign(uint256 _id) public onlyHost {
         Campaign[_id].volunteer.push(msg.sender);
     } 
     

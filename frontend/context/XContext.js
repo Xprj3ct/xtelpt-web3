@@ -13,7 +13,7 @@ export const XProvider = ({ children }) => {
 
   const router = useRouter()
 
-  const xtelptAddress = "0x7aD928627634055f32129C1bf22AB689006EF293"
+  const xtelptAddress = "0x6022ca77e9Bb56a1E1eE9dFDf2f3e15168a64766"
 
 
   useEffect(() => {
@@ -32,11 +32,16 @@ export const XProvider = ({ children }) => {
         setCurrentAccount(addressArray[0])
         createUserAccount(addressArray[0])
       } else {
-        // router.push('/')
+        // if (!me) {
+        //   router.push('/')
+        // }
+
         setAppStatus('notConnected')
       }
     } catch (err) {
-      // router.push('/')
+      // if (!me) {
+      //   router.push('/')
+      // }
       setAppStatus('error')
     }
   }
@@ -54,7 +59,9 @@ export const XProvider = ({ children }) => {
         setCurrentAccount(addressArray[0])
         createUserAccount(addressArray[0])
       } else {
-        // router.push('/')
+        // if (!me) {
+        //   router.push('/')
+        // }
         setAppStatus('notConnected')
       }
     } catch (err) {
@@ -74,7 +81,7 @@ export const XProvider = ({ children }) => {
       if (addressArray.length > 0) {
         let prof = await xtelptContract.getProfile(`${addressArray[0]}`)
         setMe(prof)
-        console.log(me)
+        // console.log(me)
       } else {
         console.log("no metamask")
       }
