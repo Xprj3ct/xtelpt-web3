@@ -76,7 +76,7 @@ const Checkschedule = () => {
                 <div className='justify-start pl-6 font-noto font-semibold text-[#817C7C] w-34 text-12'>Time and Date </div>
                 <div className='justify-center items-center'><text className='justify-center text-12 text-red-400'>{item?.desc}</text></div>
                 <div className=' items-center pr-7 justify-end'>
-                  <div onClick={() => handleCreate(item?.host, i)} className=' text-white cursor-pointer font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold bg-green-600  py-2 pl-5  text-[14px]'>
+                  <div onClick={() => handleCreate(item?.host, item?.index)} className=' text-white cursor-pointer font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold bg-green-600  py-2 pl-5  text-[14px]'>
                     Book Session
                   </div>
                 </div></div>
