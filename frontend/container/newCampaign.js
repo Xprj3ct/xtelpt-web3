@@ -27,38 +27,38 @@ const customStyles = {
 };
 
 const NewCampaign = () => {
-    let subtitle;
-    const [modalIsOpen, setIsOpen] = React.useState(false);
-  
-    function openModal() {
-      setIsOpen(true);
-    }
-  
-    function afterOpenModal() {
-      // references are now sync'd and can be accessed.
-      // subtitle.style.color = '#000';
-    }
-  
-    function closeModal() {
-      setIsOpen(false);
-    }
-    return (
-        <div>
-          <div className='' onClick={openModal}>NOTIFICATION </div>
-          <Modal
-            isOpen={modalIsOpen}
-            onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
-            <div className='flex-1 bg-[#252525]'>
-            <div className='text-white sticky top-0' onClick={closeModal}>X</div>
-              <NewNotification />
-            </div>
-          </Modal>
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = '#000';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+  return (
+    <div>
+      <div className='' onClick={openModal}>NOTIFICATION </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className='flex-1 bg-[#252525]'>
+          <div className='text-white sticky top-0' onClick={closeModal}>X</div>
+          <NewNotification />
         </div>
-      );
+      </Modal>
+    </div>
+  );
 }
 
 export default NewCampaign

@@ -85,6 +85,7 @@ contract XTELPT is  KeeperCompatibleInterface {
     struct campaign {
         address [] volunteer;
         address user;
+        address vol;
         uint256 start_time;
         uint256 end_time;
         uint256 fee;
@@ -170,17 +171,16 @@ contract XTELPT is  KeeperCompatibleInterface {
      * @dev This function `createSchedule` allows only the Host to call it hence the `OnlyHost` modifier
      * after which a Host can create a meeting with some parameters like time and fee needed
      */
-    function createSchedule(uint256 _time, uint256 _fee, string memory _desc) public onlyHost {
+    function createSchedule(uint256 _start, uint256 _time, uint256 _fee, string memory _desc) public onlyHost {
        
         meeting memory NewMeeting;
         NewMeeting.host = msg.sender;
         NewMeeting.time = _time * 60;
         NewMeeting.desc = _desc;
-        NewMeeting.start = block.timestamp;
+        NewMeeting.start = _start;
         NewMeeting.index =  meetingIndex;
         NewMeeting.fee = _fee;
 
-        i_interval = _time * 60;
         s_xtelpState[msg.sender] = XTELPState.OPEN;
         Meeting[msg.sender].push(NewMeeting);
         meetingIndex ++;
@@ -223,6 +223,7 @@ contract XTELPT is  KeeperCompatibleInterface {
      */
     function getHelp(uint256 _id) public onlyUser {
         Campaign[_id].user = msg.sender;
+        Campaign[_id].vol = Campaign[_id].volunteer[Campaign[_id].volunteer.length - 1];
     } 
 
     /**
@@ -260,7 +261,7 @@ contract XTELPT is  KeeperCompatibleInterface {
             for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) {
                 if(Meeting[AllAccount[i]][j].time > 0 && Meeting[AllAccount[i]][j].completed == false){
                     bool isOpen = XTELPState.OPEN == s_xtelpState[msg.sender];
-                    bool timePassed = ((block.timestamp - Meeting[AllAccount[i]][j].start) >  Meeting[AllAccount[i]][j].time);
+                    bool timePassed = (block.timestamp >  (Meeting[AllAccount[i]][j].start + Meeting[AllAccount[i]][j].time));
                     upkeepNeeded = (isOpen && timePassed);
                 }
                 
