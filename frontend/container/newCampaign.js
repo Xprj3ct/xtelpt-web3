@@ -6,7 +6,8 @@ import NewNotification from '../components/call/NewNotification';
 
 const customStyles = {
   overlay: {
-    backgroundColor: '#25252580'
+    backgroundColor: '#000000',
+    opacity: "0.9"
   },
   content: {
     top: '39%',
@@ -18,9 +19,10 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     padding: 10,
     height: '630px',
+    border: '1px solid black',
     backgroundColor: '#252525',
     borderRadius: '37px',
-    width: '326px',
+    width: '350px',
     height: '338px',
     border: 'none',
   },
@@ -53,7 +55,7 @@ const NewCampaign = () => {
         contentLabel="Example Modal"
       >
         <div className='flex-1 bg-[#252525]'>
-          <div className='text-white sticky top-0' onClick={closeModal}>X</div>
+          <div className='text-white text-right font-black font-mono text-2xl mr-4 sticky top-0' onClick={closeModal}>x</div>
           <NewNotification />
         </div>
       </Modal>

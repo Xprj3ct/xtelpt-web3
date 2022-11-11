@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Profile from '../../assets/profle-p.png'
 import Notification from '../../container/notification'
-import { BsMicFill } from 'react-icons/bs'
-import { MdAddReaction } from 'react-icons/md'
+import { BsMicFill, BsSoundwave } from 'react-icons/bs'
+import { MdAddReaction, MdCall } from 'react-icons/md'
 import React, { useEffect, useContext, useRef, useState } from "react";
 import { XContext } from "../../context/XContext";
 import {
@@ -18,7 +18,7 @@ const Call = () => {
   console.log(router.query.clientKey);
 
   const { currentAccount } = useContext(XContext)
-  const huddleClient = getHuddleClient(router.query.addr);
+  const huddleClient = getHuddleClient("i4pzqbpxza8vpijQMwZsP1H7nZZEHOTN3vR4NdNS");
   const stream = useRootStore((state) => state.stream);
   const enableStream = useRootStore((state) => state.enableStream);
   const pauseTracks = useRootStore((state) => state.pauseTracks);
@@ -27,7 +27,7 @@ const Call = () => {
   const peerId = useRootStore((state) => state.peerId);
   const lobbyPeers = useRootStore((state) => state.lobbyPeers);
   const roomState = useRootStore((state) => state.roomState);
-  const meetingRoom = "Mena"
+  const meetingRoom = router.query.addr
 
   const handleJoin = async () => {
     try {
@@ -62,52 +62,52 @@ const Call = () => {
     
    </div> */}
         <div className='grid place-items-center  h-full w-full'>
-          <h2 className={`text-${!roomState.joined ? "red" : "green"}`}>
-            Room Joined:&nbsp;{roomState.joined.toString()}
-          </h2>
-          {lobbyPeers[0] && <h2>Lobby Peers</h2>}
-          <div>
-            {lobbyPeers.map((peer) => (
-              <div>{peer.peerId}</div>
-            ))}
-          </div>
-          {Object.values(peers)[0] && <h2>Peers</h2>}
-
           <div className="peers-grid">
             {Object.values(peers).map((peer) => (
               <PeerVideoAudioElem peerIdAtIndex={peer.peerId} />
             ))}
           </div>
-          <div className='flex justify-center items-center mb-[11px] w-full '>
+          <div className='flex justify-center -mt-12 items-center mb-[11px] w-full '>
             <div className='w-[274px] flex h-[276px] rounded-full bg-[#D9D9D940]'>
               <div className='w-[252px] flex h-[258px] ml-[12px] mt-2 rounded-full bg-[#252525]'>
                 <div className='w-[228px] flex h-[236px] ml-[12px] mt-3 rounded-full bg-[#D9D9D9BF]'>
                   <div className='pt-1 pl-[6px] '>
-                    <Image src={Profile} height={225} width={214} />
+                    <Image src={Profile} className='rounded-full' height={225} width={214} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className='bottom-0 bg-[#755204] rounded-[10px] place-items-center h-[70px] w-[995px]'>
-            <div className='flex py-5 w-full justify-center'>
-              <div className="card">
-                <button onClick={handleJoin}>Join Room</button>
-                <button onClick={() => enableStream()}>Enable Stream</button>
-                <button onClick={() => pauseTracks()}>Disable Stream</button>
-                {/* <button onClick={() => huddleClient.enableWebcam()}>
+          {!roomState.joined ? <div className='font-bungee -mt-12 text-[20px] text-red-700'> Meeting Room is Open</div> : <div className='font-bungee -mt-28 text-[20px] text-green-500'>Meeting Room is Closed</div>}
+          {/* <h2 className={`text-${!roomState.joined ? "red" : "green"}`}>
+            Meeting Room is now Opened:&nbsp;{roomState.joined.toString()}
+          </h2> */}
+          {/* 
+          <div>
+          </div>\\
+          {Object.values(peers)[0] && <h2>Peers</h2>} */}
+          <div className='bottom-0 bg-[#755204] -mt-36 rounded-[10px] place-items-center h-[50px] w-5/6'>
+            <div className='flex py-4 w-full  justify-center'>
+              {/* <div className="card">
+            <button >Join Room</button>
+            <button >Enable Stream</button>
+            <button >Disable Stream</button>
+            <button onClick={() => huddleClient.enableWebcam()}>
               Enable Webcam
-            </button> */}
-                {/* <button onClick={() => huddleClient.disableWebcam()}>
+            </button>
+            <button onClick={() => huddleClient.disableWebcam()}>
               Disable Webcam
-            </button> */}
-                <button onClick={() => huddleClient.allowAllLobbyPeersToJoinRoom()}>
-                  Allow Client
-                </button>
-              </div>
-              <BsMicFill className='text-[#ACACAC] mr-2 h-8 w-8' />
-              <Notification />
-              <MdAddReaction className='text-[#ACACAC] ml-2 h-8 w-8' />
+            </button>
+            <button >
+              Allow Client
+            </button>
+          </div> */}
+              <BsSoundwave className='text-[#ACACAC] mr-7 cursor-pointer h-6 w-6' title='Enables stream for connection' onClick={() => enableStream()} />
+              <BsMicFill onClick={handleJoin} title="Opens a meeting room " className='text-[#ACACAC] cursor-pointer mr-7 h-6 w-6' />
+              {/* <div className='mr-7'>
+            <Notification /></div> */}
+              <MdAddReaction onClick={() => huddleClient.allowAllLobbyPeersToJoinRoom()} title="Allow peer" className='text-[#ACACAC] cursor-pointer mr-7 h-6 w-6' />
+              <MdCall className='text-[#755204] ml-20 bg-black rounded-full border-2 border-black cursor-pointer h-8 w-8 ' title='End call' onClick={() => pauseTracks()} />
             </div>
           </div>
         </div>

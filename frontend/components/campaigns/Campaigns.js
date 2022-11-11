@@ -67,13 +67,13 @@ const Campaigns = () => {
   }, [])
 
   return (
-    <div className='w-full h-vh bg-hero bg-right bg-no-repeat flex-1'>
+    <div className='w-full h-full bg-hero bg-right bg-no-repeat flex-1'>
       <div className='font-bungee text-[34px] leading-[250px] flex  justify-between text-white pl-[286px]'>
         <div>CAMPAIGNS:</div>
         <div className='mt-[100px] flex mr-[204px]'>
           <BsPlus className='text-[#A77300]' />
-          <div className='rounded-[12px] w-[154px] leading-[26px] pt-[6px] flex-auto text-[16px] border-[#EAEDEE] pl-[12px] h-[40px] bg-transparent border-[2px]'>
-            <input type="search" placeholder='Search' className='bg-transparent font-sans w-[110px] outline-none h-[16px] ' />
+          <div className='rounded-[12px] w-[154px] cursor-pointer leading-[26px] pt-[6px] flex-auto text-[16px] border-[#EAEDEE] pl-[12px] h-[40px] bg-transparent border-[2px]'>
+            <input type="search" placeholder='Search' className='bg-transparent font-sans  w-[110px] outline-none h-[16px] ' />
             <div className='-mt-5 ml-28'>
               <NewModal /></div>
           </div>
@@ -85,7 +85,7 @@ const Campaigns = () => {
             <div key={item?.start_time} className='flex grid justify-center w-full '>
               <div className='bg-[#2D1300] w-[600px] h-[400px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] mb-14 rounded-[30px] '>
                 <div className='grid place-items-center mt-16 w-full'>
-                  <Image src={ProfileImage} height={150} width={142.67} />
+                  <Image src={`https://gateway.pinata.cloud/ipfs/${item.image}`} height={150} width={142.67} />
                   <div className='font-bungee text-[24px] mt-2 text-white'>{item?.name.slice(0, 20)}</div>
                   <div className='font-noto font-semibold text-[#817C7C] leading-[14px] mt-4 text-[16px]'>{item?.desc}.</div>
                   <div className='flex items-center w-full justify-center mt-[42px]'>

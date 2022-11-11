@@ -35,7 +35,7 @@ const Profile = () => {
     setTimeout(() => {
       updateUIValues()
     }, 300);
-  }, [])
+  }, [hostAccount])
 
 
 

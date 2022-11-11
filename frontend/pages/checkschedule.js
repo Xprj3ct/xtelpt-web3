@@ -8,6 +8,7 @@ const Checkschedule = () => {
   const router = useRouter()
   const hostAccount = router.query.addr
 
+
   const { xtelptAddress, abi } = useContext(XContext)
 
   const [meeting, setMeeting] = useState()
@@ -23,12 +24,17 @@ const Checkschedule = () => {
     let arr = []
 
     const acct = router.query.addr
-    let prof = await xtelptContract.getMeeting(acct)
-    console.log("Prf", prof)
+    if (acct) {
+      let prof = await xtelptContract.getMeeting(acct)
+      console.log("Prf", prof)
 
-    if (!prof.booked) {
-      arr.push(prof)
+      if (!prof.booked) {
+        arr.push(prof)
+      }
     }
+
+
+
 
 
     if (arr.length > 0) {
@@ -64,7 +70,7 @@ const Checkschedule = () => {
     setTimeout(() => {
       updateUIValues()
     }, 1000);
-  }, [])
+  }, [hostAccount])
 
   return (
 
@@ -81,7 +87,7 @@ const Checkschedule = () => {
                 <div className='justify-start pl-6 font-noto font-semibold text-[#817C7C] w-34 text-12'>{moment.unix(item?.start).format("HH:mmA")} - {moment.unix(item?.end).format("HH:mmA")}
                 </div>
                 <div className='justify-center items-center'><text className='justify-center text-12 text-red-400'>{item?.desc}</text></div>
-                <div className='justify-center items-center'> <text className='justify-center text-12 text-[#817C7C]'>{ethers.utils.formatEther(item?.fee)} M</text></div>
+                <div className='justify-center items-center'> <text className='justify-center text-12 text-[#817C7C]'>{ethers.utils.formatEther(item?.fee)} Matic</text></div>
                 <div className=' items-center pr-7 justify-end'>
                   <div onClick={() => handleCreate(item?.host, item?.index, item?.fee)} className=' text-white cursor-pointer font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold bg-green-600  py-2 pl-5  text-[14px]'>
                     {loading ? "Loading ..." : "Book Session"}

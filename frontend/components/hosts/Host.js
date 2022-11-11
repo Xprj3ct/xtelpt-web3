@@ -5,6 +5,8 @@ import Search from '../../assets/Vector.png'
 import { useRouter } from 'next/router'
 import { ethers } from 'ethers'
 import { XContext } from '../../context/XContext'
+import NewModal from '../../container/newModal'
+import { BsSearch } from 'react-icons/bs'
 
 const Host = () => {
   const router = useRouter()
@@ -38,13 +40,7 @@ const Host = () => {
 
   }
 
-  const searchHost = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const xtelptContract = new ethers.Contract(xtelptAddress, abi, provider)
-    const prof = await xtelptContract.getProfile(text)
 
-    console.log(prof)
-  }
 
   const goToHost = async (addr) => {
     router.push({
@@ -65,9 +61,15 @@ const Host = () => {
         <div className='font-bungee text-[34px] leading-[250px] flex  justify-between text-white pl-[286px]'>
           <div>TOP HOSTS:</div>
           <div className='mt-[100px] mr-[204px]'>
-            <div className='rounded-[12px] w-[154px] leading-[26px] pt-[6px] flex-auto text-[16px] border-[#EAEDEE] pl-[12px] h-[40px] bg-transparent border-[2px]'>
-              <input type="search" placeholder='Search' className='bg-transparent font-sans w-[110px] outline-none h-[16px] ' />
-              <Image src={Search} height={15} width={15} className='mt-2 cursor-pointer' />
+            <div className='cursor-pointer rounded-[12px] w-[154px] leading-[26px] pt-[6px] flex-auto text-[16px] border-[#EAEDEE] pl-[12px] h-[40px] bg-transparent border-[2px]'>
+              <input type="search" placeholder='Search' onChange={(e) => setText(e.target.value)} className='bg-transparent font-sans w-[110px] outline-none h-[16px]' />
+              <div className='-mt-5 ml-28'>
+                <BsSearch
+                  onClick={() => router.push({
+                    pathname: '/search',
+                    query: { text: text, type: "Host" },
+                  })} height={15} width={15} className='' />
+              </div>
             </div>
           </div>
         </div>
@@ -97,6 +99,7 @@ const Host = () => {
 
         </div>
       </div>
+
     </div>
   )
 }

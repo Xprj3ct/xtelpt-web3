@@ -80,7 +80,7 @@ const Addschedule = () => {
           </div>
 
           <div className='pl-2 flex justify-center' >
-            <input onChange={(e) => setDesc(e.target.value)} type="text" className='w-[426px] h-[50px] bg-transparent mt-10 text-white rounded-[12px] border-2 pl-2' placeholder='Description' /></div>
+            <input onChange={(e) => setDesc(e.target.value)} maxLength="130" type="text" className='w-[426px] h-[50px] bg-transparent mt-10 text-white rounded-[12px] border-2 pl-2' placeholder='Description' /></div>
 
           {loading ? (
             <div className='pr-64 flex justify-center' onClick={handleCreate} title='Multiple schedule can be created' >
