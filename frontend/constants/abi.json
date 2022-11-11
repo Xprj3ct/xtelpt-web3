@@ -67,6 +67,11 @@
                 "type": "uint256"
             },
             {
+                "internalType": "string",
+                "name": "image",
+                "type": "string"
+            },
+            {
                 "internalType": "uint256",
                 "name": "fee",
                 "type": "uint256"
@@ -111,12 +116,12 @@
         "name": "Meeting",
         "outputs": [
             {
-                "internalType": "address",
+                "internalType": "address payable",
                 "name": "host",
                 "type": "address"
             },
             {
-                "internalType": "address",
+                "internalType": "address payable",
                 "name": "user",
                 "type": "address"
             },
@@ -287,6 +292,11 @@
                 "internalType": "string",
                 "name": "_desc",
                 "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_image",
+                "type": "string"
             }
         ],
         "name": "createCampaign",
@@ -441,6 +451,11 @@
                         "type": "uint256"
                     },
                     {
+                        "internalType": "string",
+                        "name": "image",
+                        "type": "string"
+                    },
+                    {
                         "internalType": "uint256",
                         "name": "fee",
                         "type": "uint256"
@@ -500,12 +515,12 @@
             {
                 "components": [
                     {
-                        "internalType": "address",
+                        "internalType": "address payable",
                         "name": "host",
                         "type": "address"
                     },
                     {
-                        "internalType": "address",
+                        "internalType": "address payable",
                         "name": "user",
                         "type": "address"
                     },
@@ -642,7 +657,7 @@
         ],
         "name": "joinMeeting",
         "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "payable",
         "type": "function"
     },
     {

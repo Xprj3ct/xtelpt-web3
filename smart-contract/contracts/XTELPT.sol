@@ -22,7 +22,7 @@ contract XTELPT is  KeeperCompatibleInterface {
 
     uint public counter;    
     // Use an i_interval in seconds and a timestamp to slow execution of Upkeep
-    uint private i_interval;
+    uint256 private immutable i_interval;
     uint public s_lastTimeStamp;
     uint public v_lastTimeStamp;
 
@@ -69,8 +69,8 @@ contract XTELPT is  KeeperCompatibleInterface {
     }
 
     struct meeting {
-        address host;
-        address user;
+        address payable host;
+        address payable user;
         uint256 start;
         uint256 end;
         string desc;
@@ -88,6 +88,7 @@ contract XTELPT is  KeeperCompatibleInterface {
         address vol;
         uint256 start_time;
         uint256 end_time;
+        string image;
         uint256 fee;
         uint256 index;
         bool completed;
@@ -123,6 +124,7 @@ contract XTELPT is  KeeperCompatibleInterface {
         v_lastTimeStamp = block.timestamp;
         s_xtelpState[msg.sender] = XTELPState.OPEN;
         volunState[msg.sender] = XTELPState.OPEN;
+        i_interval = 43200;
 
         owner =  msg.sender;
     }
@@ -174,7 +176,7 @@ contract XTELPT is  KeeperCompatibleInterface {
     function createSchedule(uint256 _start, uint256 _time, uint256 _fee, string memory _desc) public onlyHost {
        
         meeting memory NewMeeting;
-        NewMeeting.host = msg.sender;
+        NewMeeting.host = payable(msg.sender);
         NewMeeting.time = _time * 60;
         NewMeeting.desc = _desc;
         NewMeeting.start = _start;
@@ -190,8 +192,10 @@ contract XTELPT is  KeeperCompatibleInterface {
      * @dev This function `joinMeeting` allows only the User to call it hence the `OnlyUser` modifier
      * after which the meeting ID is specified and the user would be assigned to the meeting
      */
-    function joinMeeting(address _host, uint256 _id) public onlyUser {
-        Meeting[_host][_id].user = msg.sender;
+    function joinMeeting(address _host, uint256 _id) public payable onlyUser {
+        require(msg.value >= Meeting[_host][_id].fee, "Insufficient amount");
+
+        Meeting[_host][_id].user = payable(msg.sender);
         Meeting[_host][_id].booked = true;
     } 
 
@@ -199,16 +203,16 @@ contract XTELPT is  KeeperCompatibleInterface {
      * @dev This function `createCampaign` allows only the User to call it hence the `OnlyUser` modifier
      * after which any avaliable volunteer would be assigned to the campaign
      */
-    function createCampaign(string memory _name, string memory _desc) public onlyOwner {
+    function createCampaign(string memory _name, string memory _desc, string memory _image) public onlyOwner {
         
         campaign memory NewCampaign;
         NewCampaign.start_time = block.timestamp;
         NewCampaign.name = _name;
+        NewCampaign.image = _image;
         NewCampaign.index = campaignIndex;
         NewCampaign.desc = _desc;
         NewCampaign.fee = 0;
 
-        i_interval = 1;
         s_xtelpState[msg.sender] = XTELPState.OPEN;
 
         Campaign.push(NewCampaign);
@@ -261,7 +265,7 @@ contract XTELPT is  KeeperCompatibleInterface {
             for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) {
                 if(Meeting[AllAccount[i]][j].time > 0 && Meeting[AllAccount[i]][j].completed == false){
                     bool isOpen = XTELPState.OPEN == s_xtelpState[msg.sender];
-                    bool timePassed = (block.timestamp >  (Meeting[AllAccount[i]][j].start + Meeting[AllAccount[i]][j].time));
+                    bool timePassed = ((block.timestamp - s_lastTimeStamp) > i_interval);
                     upkeepNeeded = (isOpen && timePassed);
                 }
                 
@@ -279,6 +283,12 @@ contract XTELPT is  KeeperCompatibleInterface {
             for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) {
                (bool upkeepNeeded, ) = checkUpkeep("");
                 require(upkeepNeeded, "Doesn't meet requirement for UpKeep");
+
+                s_lastTimeStamp = block.timestamp;
+
+                address payable host = Meeting[AllAccount[i]][j].host;
+                host.transfer(Meeting[AllAccount[i]][j].fee);
+
                 Meeting[AllAccount[i]][j].completed = true;
                 Meeting[AllAccount[i]][j].end = block.timestamp;
                 s_xtelpState[AllAccount[i]] = XTELPState.CLOSED;

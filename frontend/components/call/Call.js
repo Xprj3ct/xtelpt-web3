@@ -16,11 +16,9 @@ import { useRouter } from 'next/router'
 const Call = () => {
   const router = useRouter()
   console.log(router.query.clientKey);
-  const campaignID = router.query.campaignID;
-
 
   const { currentAccount } = useContext(XContext)
-  const huddleClient = getHuddleClient(router.query.clientKey);
+  const huddleClient = getHuddleClient(router.query.addr);
   const stream = useRootStore((state) => state.stream);
   const enableStream = useRootStore((state) => state.enableStream);
   const pauseTracks = useRootStore((state) => state.pauseTracks);

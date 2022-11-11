@@ -15,6 +15,7 @@ const Auth = () => {
   const { xtelptAddress, abi } = useContext(XContext)
 
   const [newHost, setNewHost] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [file, setFile] = useState()
   const [hostTitle, setHostTitle] = useState("")
   const [name, setName] = useState("")
@@ -31,6 +32,7 @@ const Auth = () => {
   // console.log(xtelptAddress, abi)
 
   const handleCreate = async () => {
+
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner();
     const xtelptContract = new ethers.Contract(xtelptAddress, abi, signer)
@@ -53,6 +55,8 @@ const Auth = () => {
       // the endpoint needed to upload the file
       const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`
 
+      setLoading(true)
+
       await axios.post(
         url,
         formData,
@@ -67,21 +71,24 @@ const Auth = () => {
         }
       )
         .then(async (response) => {
+
           console.log(response)
           setIpfsHash(response.data.IpfsHash)
+
 
           if (newHost) {
             console.log("creating host")
             const createHost = await xtelptContract.createHost(0, name, response.data.IpfsHash, bio, hostTitle)
-            router.push('/profile')
+            window.location.href = "/profile"
           } else {
             console.log("creating user")
             const createUser = await xtelptContract.createUser(0, name, response.data.IpfsHash, bio)
-            router.push('/profile')
+            window.location.href = "/profile"
           }
 
         })
         .catch((err) => {
+          setLoading(false)
           console.log(err)
         })
 
@@ -113,7 +120,7 @@ const Auth = () => {
           </div>
           {newHost ? <input onChange={(e) => setHostTitle(e.target.value)} className='w-[426px] h-[50px] bg-transparent rounded-[12px] text-white border-2 pl-2' placeholder='Host Type?' /> : null}
           <textarea onChange={(e) => setBio(e.target.value)} className='w-[426px] h-[221px] rounded-[12px] text-white bg-transparent border-2 px-2' placeholder='Bio' />
-          <div onClick={handleCreate} className='font-noto bg-[#755204] cursor-pointer text-[14px] h-[41px] rounded-[12px] px-2 py-2 w-[150px] text-white'>Create Profile</div>
+          <div onClick={handleCreate} className='font-noto bg-[#755204] cursor-pointer text-[14px] h-[41px] rounded-[12px] px-2 py-2 w-[150px] text-white'>{loading ? "Loading ..." : "Create Profile"}</div>
           <br />
           <br />
         </div>

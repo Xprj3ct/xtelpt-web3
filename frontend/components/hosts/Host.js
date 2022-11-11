@@ -46,6 +46,13 @@ const Host = () => {
     console.log(prof)
   }
 
+  const goToHost = async (addr) => {
+    router.push({
+      pathname: '/hostprofile',
+      query: { addr: addr },
+    })
+  }
+
   useEffect(() => {
     setTimeout(() => {
       updateUIValues()
@@ -67,7 +74,7 @@ const Host = () => {
         <div className='grid place-items-center w-full'>
           <div className='flex px-[265px] w-full justify-between pb-40'>
             {host?.map((item) => (
-              <div key={item.addr} onClick={() => router.push('/call/mena')} className='bg-[#2D1300] w-[350px] cursor-pointer h-[250px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
+              <div key={item.addr} onClick={() => goToHost(item?.addr)} className='bg-[#2D1300] w-[350px] cursor-pointer h-[250px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
                 <div className='grid place-items-center mt-10 w-full'>
                   <Image src={`https://gateway.pinata.cloud/ipfs/${item.profilePic}`} className="rounded-full" height={70} width={70} />
                   <div className='font-bungee text-white mt-4'>{item.name}</div>
@@ -87,38 +94,7 @@ const Host = () => {
               </div>
             ))}
           </div>
-          {/* <div className='flex px-[265px] mb-[67px] mt-[58px] w-full justify-between'>
-            <div onClick={() => router.push('/call')} className='bg-[#2D1300] w-[350px] cursor-pointer h-[250px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
-              <div className='grid place-items-center mt-16 w-full'>
-                <Image src={ProfileImage} height={54} width={55} />
-                <div className='font-bungee text-white'>Amanda Stenberg</div>
-                <div className='font-noto font-semibold text-white leading-[14px] text-[8px]'>0x9035a35...</div>
-                <div className='flex font-noto font-semibold mt-[10px] leading-[14px] text-[14px]'>
-                  <div className='text-white'>Host  </div>
-                  <div className='w-[5px] h-[5px] -mt-[2px]'>
-                    <Image src={Ellipse} className='h-[5px] text-[#D9D9D9] w-[5px]' height={5} width={5} />
-                  </div>
-                  <div className='text-white'>  Therapist</div>
-                </div>
-                <div className='text-[10px] leading-[14px] mt-[15px] text-[#817C7C]'>humanitarian and blablabla</div>
-              </div>
-            </div>
-            <div onClick={() => router.push('/call')} className='bg-[#2D1300] w-[350px] cursor-pointer h-[250px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
-              <div className='grid place-items-center mt-16 w-full'>
-                <Image src={ProfileImage} height={54} width={55} />
-                <div className='font-bungee text-white'>Amanda Stenberg</div>
-                <div className='font-noto font-semibold text-white leading-[14px] text-[8px]'>0x9035a35...</div>
-                <div className='flex font-noto font-semibold mt-[10px] leading-[14px] text-[14px]'>
-                  <div className='text-white'>Host  </div>
-                  <div className='w-[5px] h-[5px] -mt-[2px]'>
-                    <Image src={Ellipse} className='h-[5px] text-[#D9D9D9] w-[5px]' height={5} width={5} />
-                  </div>
-                  <div className='text-white'>  Therapist</div>
-                </div>
-                <div className='text-[10px] leading-[14px] mt-[15px] text-[#817C7C]'>humanitarian and blablabla</div>
-              </div>
-            </div>
-          </div> */}
+
         </div>
       </div>
     </div>

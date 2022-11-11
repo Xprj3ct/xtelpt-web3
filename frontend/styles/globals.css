@@ -9,14 +9,14 @@
   font-weight: normal;
 }
 
-.bg-hero { 
+.bg-hero {
   /* width: 600px;
   height: 485.6px; */
   background-image: url(../assets/XTELP\ T\ 1.png);
- }
+}
 
 @font-face {
- font-family: "bungee";
+  font-family: "bungee";
   src: url("../public/font/bungee/BungeeInline-Regular.ttf");
   font-weight: normal;
 }
@@ -60,9 +60,11 @@ button:hover {
   padding: 1.5em;
   will-change: filter;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -77,6 +79,7 @@ button:hover {
 .w-fit {
   width: fit-content;
 }
+
 .mx-auto {
   margin: auto;
 }
@@ -88,6 +91,7 @@ button:hover {
 .text-red {
   color: red;
 }
+
 .text-green {
   color: green;
 }
@@ -110,6 +114,7 @@ ol {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -129,3 +134,46 @@ ol {
   color: #888;
 }
 
+
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -13,7 +13,7 @@ export const XProvider = ({ children }) => {
 
   const router = useRouter()
 
-  const xtelptAddress = "0x44b1820fE46e57BaCD0CC6Da1b438263692B3859"
+  const xtelptAddress = "0xB7f1E800759e7D96f0732aac483Eec50be8c79Bb"
 
 
   useEffect(() => {
@@ -58,10 +58,20 @@ export const XProvider = ({ children }) => {
       if (addressArray.length > 0) {
         setCurrentAccount(addressArray[0])
         createUserAccount(addressArray[0])
+
+        if (window.ethereum) {
+          const currentChainId = await window.ethereum.request({
+            method: 'eth_chainId',
+          });
+
+          // return true if network id is the same
+          if (currentChainId != "80001") {
+            alert("Switch To Mumbai Testnet")
+          }
+        }
+
       } else {
-        // if (!me) {
-        //   router.push('/')
-        // }
+
         setAppStatus('notConnected')
       }
     } catch (err) {

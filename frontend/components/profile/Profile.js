@@ -1,12 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Header from '../home/header'
 import Image from 'next/image'
-import ProfileImage from '../../assets/Oval.png'
 import Ellipse from '../../assets/Ellipse 2.png'
 import { useRouter } from 'next/router'
 import { XContext } from '../../context/XContext';
-import { ethers } from 'ethers'
-import { abi } from '../../constants'
+
 
 const Profile = () => {
   const { currentAccount, me } = useContext(XContext)
@@ -26,7 +23,10 @@ const Profile = () => {
               <div className='w-5 pl-2 h-5 -mt-1'>
                 <Image src={Ellipse} height={5} width={5} />
               </div>
-              <div className='text-white text-10'>Therapist</div>
+              {me?.role == "Host" && (
+                <div className='text-white text-10'>{me?.hostTitle}</div>
+              )}
+
             </div>
             <div className='font-noto text-12 mt-1 text-[#817C7C]'>{me?.bio}</div>
             <div className='flex items-center w-full justify-center mt-[8px]'>
@@ -35,21 +35,9 @@ const Profile = () => {
                   <div className=' justify-center cursor-pointer text-white text-15'>Add Schedule</div>
                 </div>
               )}
-              {me?.role == "User" && (
-                <div onClick={() => router.push('/schedule')} className='flex cursor-pointer font-noto rounded-[10px] h-15 w-50 text-center font-medium mb-5 bg-[#A77300] mt-[10px] p-2'>
-                  <div className=' justify-center cursor-pointer text-white text-15'>Check Schedule</div>
-                </div>
-              )}
-              {me?.role == "User" && (
-                <div onClick={() => router.push('/call')} className='flex cursor-pointer font-noto rounded-[10px] h-15 w-50 text-center font-medium mb-5 bg-[#A77300] mt-[10px] p-2'>
-                  <div className=' justify-center text-white text-15'>Add Campaign</div>
-                </div>
-              )}
 
             </div>
-            <div className='flex -mt-[40px] mr-12 w-full'>
-              <div className='text-right text-[#817C7C] text-[14px] mb-10 ml-auto'><u>Ratings & Reviews</u></div>
-            </div>
+
           </div>
 
         </div>
