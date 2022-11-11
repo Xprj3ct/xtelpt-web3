@@ -11,5 +11,4 @@ describe("Xtelpt Unit Tests", function () {
         allAccount = await xtelpt.AllAccount()
     })
 
-
 })

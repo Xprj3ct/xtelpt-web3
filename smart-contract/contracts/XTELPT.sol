@@ -173,11 +173,11 @@ contract XTELPT is  KeeperCompatibleInterface {
      * @dev This function `createSchedule` allows only the Host to call it hence the `OnlyHost` modifier
      * after which a Host can create a meeting with some parameters like time and fee needed
      */
-    function createSchedule(uint256 _start, uint256 _time, uint256 _fee, string memory _desc) public onlyHost {
+    function createSchedule(uint256 _start, uint256 _end, uint256 _fee, string memory _desc) public onlyHost {
        
         meeting memory NewMeeting;
         NewMeeting.host = payable(msg.sender);
-        NewMeeting.time = _time * 60;
+        NewMeeting.end = _end;
         NewMeeting.desc = _desc;
         NewMeeting.start = _start;
         NewMeeting.index =  meetingIndex;
@@ -290,7 +290,6 @@ contract XTELPT is  KeeperCompatibleInterface {
                 host.transfer(Meeting[AllAccount[i]][j].fee);
 
                 Meeting[AllAccount[i]][j].completed = true;
-                Meeting[AllAccount[i]][j].end = block.timestamp;
                 s_xtelpState[AllAccount[i]] = XTELPState.CLOSED;
             }
         }

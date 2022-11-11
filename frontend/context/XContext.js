@@ -13,7 +13,7 @@ export const XProvider = ({ children }) => {
 
   const router = useRouter()
 
-  const xtelptAddress = "0xB7f1E800759e7D96f0732aac483Eec50be8c79Bb"
+  const xtelptAddress = "0xbefDD1105c58c7CC19673f49e4A5e57Edd8ed10b"
 
 
   useEffect(() => {

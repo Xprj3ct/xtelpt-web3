@@ -62,38 +62,31 @@ This will create the a Host profile using your public address which is the ```ms
 ```_rating``` is a integer, while ```_name _pic _bio``` are string.
 
 
-### 3. How to become a volunteer
-Only an account with a **Host** role can become a volunteer thereby making the host avaliable to a campaign, calling the **becomeVolun()** with an account that doesn't have a host role will return an error.
+### 3.  How to Create a Schedule or Meeting
+Only an account with a **Host** in order to create a schedule four parameters are required which are ```start```, ```end```, ```fee``` and ```desc```.
 
 ```
-becomeVolun()
+createSchedule(uint256 _start, uint256 _end, uint256 _fee, string memory _desc)
 ```
 
-### 4. How to become a un volunteer
-Only an account with a **Host** thereby making the host unavaliable to a campaign, calling the **becomeVolun()** with an account that doesn't have a host role will return an error.
-
-```
-unVolun()
-```
-
-### 5.  How to Create a Schedule or Meeting
-Only an account with a **Host** in order to create a schedule two parameters are required whuich are ```time``` and ```fee```.
-
-```
-createSchedule(uint256 _time, uint256 _fee)
-```
-
-### 6. Joining a Meeting
+### 4. Joining a Meeting
 Only **User** can call this function, it takes the address of a specific host and the ID of a meeting created and assign the user to the meeting
 ```
 joinMeeting(address _host, uint256 _id)
 ```
 
-### 7.  Creating a Campaign
-Only an account with a **User** can create a campaign, when this function is called it creates a campaign and assigns randomly any volunteer which is a host tha has **becomeVolun** and then the campaigns start, it gives the user ability to create a meeting between them and a random **host**.
+### 5.  Creating a Campaign
+Only an account with a **User** can create a campaign, when this function is called it creates a campaign and assigns randomly any volunteer which is a host when a user getHelp if host are avaliable in the particular campaign and then the campaigns start, it gives the user ability to create a meeting between user and a random **host**.
 
 ```
-createCampaign()
+createCampaign(string memory _name, string memory _desc, string memory _image)
+```
+
+### 6.  Get Help
+Only an account with a **User** can call the getHelp function it assigns the user to the campaign and assigns a host from the list of volunteers for the campaign to the meeting.
+
+```
+getHelp(uint256 _id)
 ```
 
 ### 7.  Ending a campaign
@@ -124,23 +117,30 @@ function checkUpkeep(bytes memory /* checkData */) public view override returns 
     }
 ```
 
-### 9.  CheckUpKeep function from ChainLink
+### 9.  PerformUpKeep function from ChainLink
 This is the ```chainlink``` automation function that checks if ```upkeepNeeded``` is true if yes it set the meeting ```completed``` attribute to completed.
 
 ```
   function performUpkeep(bytes calldata /*performData*/) external override {
-        for (uint i = 0; i < AllHost.length; i++) {
-            for (uint j = 0; j < Meeting[AllHost[i]].length; j++) {
+        for (uint i = 0; i < AllAccount.length; i++) {
+            for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) {
                (bool upkeepNeeded, ) = checkUpkeep("");
                 require(upkeepNeeded, "Doesn't meet requirement for UpKeep");
-                Meeting[AllHost[i]][j].completed = true;
-                Meeting[AllHost[i]][j].end = block.timestamp;
-                s_xtelpState[AllHost[i]] = XTELPState.CLOSED;
+
+                s_lastTimeStamp = block.timestamp;
+
+                address payable host = Meeting[AllAccount[i]][j].host;
+                host.transfer(Meeting[AllAccount[i]][j].fee);
+
+                Meeting[AllAccount[i]][j].completed = true;
+                s_xtelpState[AllAccount[i]] = XTELPState.CLOSED;
             }
-        }        
-        
+        }
     }
 ```
+
+### 10.  Getter Functions
+This is used to get variables, struct which the frontend can interact with.
 
 
 

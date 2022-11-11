@@ -346,7 +346,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "_time",
+                "name": "_end",
                 "type": "uint256"
             },
             {

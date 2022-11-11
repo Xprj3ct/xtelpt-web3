@@ -22,7 +22,8 @@ const Checkschedule = () => {
 
     let arr = []
 
-    let prof = await xtelptContract.getMeeting(hostAccount)
+    const acct = router.query.addr
+    let prof = await xtelptContract.getMeeting(acct)
     console.log("Prf", prof)
 
     if (!prof.booked) {

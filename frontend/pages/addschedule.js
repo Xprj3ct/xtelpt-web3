@@ -33,9 +33,9 @@ const Addschedule = () => {
 
     const end = Math.round(dur / 1000)
 
-    const intr = Math.abs((start - end) / 60);
+    // const intr = Math.abs((start - end) / 60);
 
-    console.log(intr)
+    // console.log(intr)
 
     console.log("started")
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -43,7 +43,7 @@ const Addschedule = () => {
     const xtelptContract = new ethers.Contract(xtelptAddress, abi, signer)
 
     try {
-      const createSchedule = await xtelptContract.createSchedule(start, intr, fee, desc)
+      const createSchedule = await xtelptContract.createSchedule(start, end, fee, desc)
 
     } catch (error) {
       setLoading(false)
@@ -57,7 +57,6 @@ const Addschedule = () => {
     })
 
   }
-
 
 
   return (
