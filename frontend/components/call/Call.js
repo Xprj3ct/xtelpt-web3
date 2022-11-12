@@ -76,10 +76,10 @@ const Call = () => {
                 <div className='w-[228px] flex h-[236px] ml-[12px] mt-3 rounded-full bg-[#D9D9D9BF]'>
                   <div className='pt-1 pl-[6px] '>
                     {me?.role == "Host" && (
-                      <Image src={userProfile?.profilePic} className='rounded-full' height={225} width={214} />
+                      <Image src={`https://gateway.pinata.cloud/ipfs/${userProfile?.profilePic}`} className='rounded-full' height={225} width={214} />
                     )}
                     {me?.role == "User" && (
-                      <Image src={hostProfile?.profilePic} className='rounded-full' height={225} width={214} />
+                      <Image src={`https://gateway.pinata.cloud/ipfs/${hostProfile?.profilePic}`} className='rounded-full' height={225} width={214} />
                     )}
                   </div>
                 </div>
