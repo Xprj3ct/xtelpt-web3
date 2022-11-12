@@ -13,7 +13,7 @@ pragma solidity ^0.8.7;
 // import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
 contract XTELPT  {
-    address owner;
+    address public owner;
 
     enum XTELPState {
         OPEN,
@@ -32,11 +32,9 @@ contract XTELPT  {
 
 
     /* Campaign and Meeting variables */
-
     mapping(address => meeting[]) public Meeting;
 
     campaign [] public Campaign;
-
 
     uint256 public campaignIndex;
     

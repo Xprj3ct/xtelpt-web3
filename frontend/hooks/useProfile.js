@@ -1,6 +1,7 @@
 import { ethers } from 'ethers'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { abi } from '../constants'
+import { XContext } from '../context/XContext';
 
 const useProfile = (addr) => {
     const [profile, setProfile] = useState(null)
