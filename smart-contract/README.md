@@ -96,56 +96,23 @@ Only an account with a **User** can end a campaign, when this function is called
 endCampaign(address _user, uint256 _id)
 ```
 
-### 8.  CheckUpKeep function from ChainLink
-This is the ```chainlink``` automation function which is used to check if a meeting time has expired then ```UpkeepNeeded``` is returned.
+### 8.  End meeting function called by chainlink automation
+This is the ```chainlink``` automation function which is called every 24hrs.
+<a href="https://automation.chain.link/mumbai/12608492109755611185361602819699981758653490897916939082342476465275548388940" target="_blank">Link</a> to the automation 
 
 ```
-function checkUpkeep(bytes memory /* checkData */) public view override returns ( bool upkeepNeeded,
-    bytes memory /* performData */  ) {
-        
-        for (uint i = 0; i < AllHost.length; i++) {
-            for (uint j = 0; j < Meeting[AllHost[i]].length; j++) {
-                if(Meeting[AllHost[i]][j].time > 0 && Meeting[AllHost[i]][j].completed == false){
-                    bool isOpen = XTELPState.OPEN == s_xtelpState[msg.sender];
-                    bool timePassed = ((block.timestamp - Meeting[AllHost[i]][j].start) >  Meeting[AllHost[i]][j].time);
-                    upkeepNeeded = (isOpen && timePassed);
-                }
-                
-            }
-        }
-       
-    }
-```
-
-### 9.  PerformUpKeep function from ChainLink
-This is the ```chainlink``` automation function that checks if ```upkeepNeeded``` is true if yes it set the meeting ```completed``` attribute to completed.
-
-```
-  function performUpkeep(bytes calldata /*performData*/) external override {
-        for (uint i = 0; i < AllAccount.length; i++) {
-            for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) {
-               (bool upkeepNeeded, ) = checkUpkeep("");
-                require(upkeepNeeded, "Doesn't meet requirement for UpKeep");
-
-                s_lastTimeStamp = block.timestamp;
-
-                address payable host = Meeting[AllAccount[i]][j].host;
-                host.transfer(Meeting[AllAccount[i]][j].fee);
-
+function endMeeting() public {
+         for (uint i = 0; i < AllAccount.length; i++) {
+            for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) { 
                 Meeting[AllAccount[i]][j].completed = true;
-                s_xtelpState[AllAccount[i]] = XTELPState.CLOSED;
+                lastTimeStamp = block.timestamp;
             }
         }
     }
 ```
 
-### 10.  Getter Functions
+### 9.  Getter Functions
 This is used to get variables, struct which the frontend can interact with.
-
-
-
-## Issue
-This repository is maintained actively, so if you face any issue please <a href="https://github.com/thexovc/xtelpt-web3/issues/new">raise an issue</a>.
 
 <h4>Liked the work ?</h4>
 Give the repository a star :-)
