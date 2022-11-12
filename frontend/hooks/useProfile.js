@@ -4,9 +4,8 @@ import { abi } from '../constants'
 
 const useProfile = (addr) => {
     const [profile, setProfile] = useState(null)
-    const xtelptAddress = "0xbefDD1105c58c7CC19673f49e4A5e57Edd8ed10b"
 
-
+    const { xtelptAddress } = useContext(XContext)
 
     const updateUIValues = async () => {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
