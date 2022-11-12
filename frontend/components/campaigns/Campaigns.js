@@ -84,11 +84,11 @@ const Campaigns = () => {
           return (
             <div key={item?.start_time} className='flex grid justify-center w-full '>
               <div className='bg-[#2D1300] w-[600px] h-[400px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] mb-14 rounded-[30px] '>
-                <div className='grid place-items-center mt-16 w-full'>
+                <div className='grid place-items-center mt-8 w-full'>
                   <Image src={`https://gateway.pinata.cloud/ipfs/${item.image}`} height={150} width={142.67} />
                   <div className='font-bungee text-[24px] mt-2 text-white'>{item?.name.slice(0, 20)}</div>
-                  <div className='font-noto font-semibold text-[#817C7C] leading-[14px] mt-4 text-[16px]'>{item?.desc}.</div>
-                  <div className='flex items-center w-full justify-center mt-[42px]'>
+                  <div className='font-noto text-center font-semibold text-[#817C7C] leading-[14px] mt-4 text-[16px]'>{item?.desc}</div>
+                  <div className='flex items-center w-full justify-center mt-[32px]'>
                     {me?.role == "User" && (
                       <div onClick={() => handleHelp(item?.index)} className={`flex text-white cursor-pointer ${item?.volunteer.length == 0 && ('disabled:opacity-70 bg-gray-700')} font-noto rounded-[10px] h-[40px] w-[114px] text-center font-semibold bg-[#A77300] mt-[10px] py-2 pl-[16px] text-[16px]`}>
                         {loading ? "Loading ..." : "Get Help"}
