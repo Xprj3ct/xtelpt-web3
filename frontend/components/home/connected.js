@@ -23,7 +23,7 @@ const Connected = () => {
                     <div onClick={() => router.push('/community')} className='mr-[20px] hover:text-gray-500 cursor-pointer leading-[10px] '>COMMUNITY</div>
                 </div>
                 <div >
-                    {!me? (
+                {!me?.role ? (
                         <InitAccount />
                     ) : (
                         <div className='flex'>
