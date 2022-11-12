@@ -105,7 +105,7 @@ export const XProvider = ({ children }) => {
     setTimeout(() => {
       updateUIValues()
     }, 300);
-  }, [])
+  }, [currentAccount])
 
 
 

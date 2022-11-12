@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Header from '../components/home/header'
 import Main from '../components/home/main'
@@ -14,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className='bg-[#252525]  h-full w-full flex-1'>
-        <Header/>
+        <Header />
         <Main />
         <Footer />
       </div>

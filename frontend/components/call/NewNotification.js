@@ -92,8 +92,6 @@ const NewNotification = () => {
 
   }
 
-
-
   useEffect(() => {
     setTimeout(() => {
       updateUIValues()
@@ -118,11 +116,12 @@ const NewNotification = () => {
               <>
                 {meeting?.map((item) => (
                   <div
+                    key={item?.index}
                     className='bg-[#D9D9D933] py-2 h-[60px] rounded-[12px] w-[296px] text-[16px] text-left flex pl-2 mt-[12px]'>Hey! Your meeting starts by {moment.unix(item?.start).format("HH:mmA")}
                     <span
                       onClick={() => router.push({
                         pathname: '/call',
-                        query: { addr: item?.host },
+                        query: { hostAddr: item?.host, userAddr: item?.user },
                       })} className='bg-[#6BE42B] mt-2 text-center hover:cursor-pointer w-[56px] py-[5px] text-[12px] mr-2 rounded-[7px] h-[28px]'>
                       Join
                     </span>
@@ -130,11 +129,13 @@ const NewNotification = () => {
                 ))}
 
                 {campaign?.map((item) => (
-                  <div className='bg-[#D9D9D933] py-2 h-[60px] rounded-[12px] w-[296px] mt-[12px] pl-2 flex justify-between'>You can join your campaign by {moment.unix(item?.start_time).format("HH:mmA")}
+                  <div
+                    key={item?.index}
+                    className='bg-[#D9D9D933] py-2 h-[60px] rounded-[12px] w-[296px] mt-[12px] pl-2 flex justify-between'>You can join your campaign by {moment.unix(item?.start_time).format("HH:mmA")}
                     <span
                       onClick={() => router.push({
                         pathname: '/call',
-                        query: { addr: item?.user },
+                        query: { hostAddr: item?.vol, userAddr: item?.user },
                       })} className='bg-[#6BE42B] mt-2 text-center hover:cursor-pointer w-[56px] py-[5px] text-[12px] mr-2 rounded-[7px] h-[28px]'>
                       Join
                     </span>
@@ -151,12 +152,13 @@ const NewNotification = () => {
               <>
                 {hostMeeting?.map((item) => (
                   <div
+                    key={item?.index}
                     className='bg-[#D9D9D933] py-2 h-[60px] rounded-[12px] w-[296px] text-[14px] text-left flex pl-2 mt-[12px]'>Hey! Your meeting starts by {moment.unix(item?.start).format("HH:mmA")}
 
                     <span
                       onClick={() => router.push({
                         pathname: '/call',
-                        query: { addr: item?.host },
+                        query: { hostAddr: item?.host, userAddr: item?.user },
                       })} className='bg-[#6BE42B] mt-2 text-center hover:cursor-pointer w-[56px] py-[5px] text-[12px] ml-2 mr-2 rounded-[7px] h-[28px]'>
                       Start
                     </span>
@@ -167,11 +169,11 @@ const NewNotification = () => {
                 ))}
 
                 {hostCampaign?.map((item) => (
-                  <div className='bg-[#D9D9D933] py-2 h-[60px] rounded-[12px] w-[296px] mt-[12px] pl-2 flex justify-between'>You can join your campaign by {moment.unix(item?.start_time).format("HH:mmA")}
+                  <div key={item?.index} className='bg-[#D9D9D933] py-2 h-[60px] rounded-[12px] w-[296px] mt-[12px] pl-2 flex justify-between'>You can join your campaign by {moment.unix(item?.start_time).format("HH:mmA")}
                     <span
                       onClick={() => router.push({
                         pathname: '/call',
-                        query: { addr: item?.user },
+                        query: { hostAddr: item?.vol, userAddr: item?.user },
                       })} className='bg-[#6BE42B] mt-2 text-center hover:cursor-pointer w-[56px] py-[5px] text-[12px] mr-2 rounded-[7px] h-[28px]'>
                       Join
                     </span>

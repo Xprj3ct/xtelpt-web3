@@ -65,18 +65,18 @@ const Addschedule = () => {
         <div className=' flex-1'>
           <div className='text-[32px] justify-center mt-32 flex font-noto text-green-400 font-semibold'>Set Availability time.</div>
 
-          <div className='flex justify-center mt-10 h-12 pr-12 font-bold text-white'> <text className='pr-4 mt-2'> Date & Time: </text>
+          <div className='flex justify-center mt-10 h-12 pr-12 font-bold text-white'> <p className='pr-4 mt-2'> Date & Time: </p>
             <div className='w-60 h-12 rounded-[12px] border-4  text-black flex bg-blue-200 self-center' >
               <input className='outline-none bg-transparent' onChange={(e) => setDatetime(e.target.value)} type="datetime-local" id="Test_timeLocal" />
             </div></div>
 
-          <div className='flex justify-center mt-10 h-12 pr-12 font-bold text-white'> <text className='pr-4 mt-2'> End Date/Time </text>
+          <div className='flex justify-center mt-10 h-12 pr-12 font-bold text-white'> <p className='pr-4 mt-2'> End Date/Time </p>
             <div className='w-60 h-12 rounded-[12px] border-4  text-black flex bg-blue-200 self-center ' >
               <input className=' outline-none bg-transparent' onChange={(e) => setDura(e.target.value)} id="Test_timeLocal" type="datetime-local" title='write a duration in hh:mm:ss' /> </div>
           </div>
-          <div className='flex justify-center mt-10 h-12 pr-16 font-bold text-white'> <text className='pr-4 mt-2'> Session Fee </text>
+          <div className='flex justify-center mt-10 h-12 pr-16 font-bold text-white'> <p className='pr-4 mt-2'> Session Fee </p>
             <div className='w-60 h-12 rounded-[12px] border-4  text-black flex pl-2 self-center ' >
-              <input className=' outline-none bg-transparent text-white' onChange={(e) => setPrice(e.target.value)} id="price" placeholder='$' type="number" title='Price in Matic' /> </div>
+              <input className=' outline-none bg-transparent text-white' onChange={(e) => setPrice(e.target.value)} id="price" placeholder='Matic' type="number" title='Price in Matic' /> </div>
           </div>
 
           <div className='pl-2 flex justify-center' >

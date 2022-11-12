@@ -1,7 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { BsMicFill, BsFillChatLeftFill } from 'react-icons/bs'
 import NewNotification from '../components/call/NewNotification';
 
 const customStyles = {
@@ -30,7 +28,7 @@ const customStyles = {
 
 const NewCampaign = () => {
   let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
@@ -51,6 +49,7 @@ const NewCampaign = () => {
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
+        ariaHideApp={false}
         style={customStyles}
         contentLabel="Example Modal"
       >

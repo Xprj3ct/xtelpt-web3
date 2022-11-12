@@ -10,7 +10,7 @@ import HuddleI from "./Huddle-I";
 
 const HuddleC = () => {
   const { connectWallet, appStatus, currentAccount } = useContext(XContext)
-    const huddleClient = getHuddleClient("i4pzqbpxza8vpijQMwZsP1H7nZZEHOTN3vR4NdNS");
+  const huddleClient = getHuddleClient("i4pzqbpxza8vpijQMwZsP1H7nZZEHOTN3vR4NdNS");
   const stream = useRootStore((state) => state.stream);
   const enableStream = useRootStore((state) => state.enableStream);
   const pauseTracks = useRootStore((state) => state.pauseTracks);
@@ -20,10 +20,13 @@ const HuddleC = () => {
   const lobbyPeers = useRootStore((state) => state.lobbyPeers);
   const roomState = useRootStore((state) => state.roomState);
 
+
+  console.log("Lobby Peers", lobbyPeers)
+
   const handleJoin = async () => {
     try {
       await huddleClient.join("dev ", {
-        address: {currentAccount},
+        address: { currentAccount },
         wallet: "",
         ens: "axit.eth",
       });
@@ -33,7 +36,7 @@ const HuddleC = () => {
       console.log({ error });
     }
   };
-  
+
 
   const videoRef = useRef(null);
 
@@ -48,7 +51,7 @@ const HuddleC = () => {
   }, [peers, peerId, isCamPaused]);
 
   return (
-         <HuddleClientProvider value={huddleClient}>
+    <HuddleClientProvider value={huddleClient}>
       <div className="App grid grid-cols-2">
         <div>
           <h1>Vite + React</h1>
@@ -96,11 +99,11 @@ const HuddleC = () => {
               style={{ width: "50%" }}
               ref={videoRef}
               autoPlay
-              // muted
+            // muted
             ></video>
           )}
 
-            {/* <div><HuddleI/></div> */}
+          {/* <div><HuddleI/></div> */}
 
           {lobbyPeers[0] && <h2>Lobby Peers</h2>}
           <div>

@@ -9,7 +9,7 @@ const Checkschedule = () => {
   const hostAccount = router.query.addr
 
 
-  const { xtelptAddress, abi } = useContext(XContext)
+  const { xtelptAddress, abi, me } = useContext(XContext)
 
   const [meeting, setMeeting] = useState()
   const [loading, setLoading] = useState(false)
@@ -81,17 +81,23 @@ const Checkschedule = () => {
       <div className='place-items-center h-full w-full'>
         {meeting?.map((hostMeeting) => hostMeeting.map((item) =>
         (
-          <div key={`${item?.host}`} className='flex justify-center pb-10 w-full '>
+          <div key={`${item?.index}`} className='flex justify-center pb-10 w-full '>
             <div className='bg-[#2D1300] w-1/2 h-full shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
               <div className='flex justify-between p-6 '>
                 <div className='justify-start pl-6 font-noto font-semibold text-[#817C7C] w-34 text-12'>{moment.unix(item?.start).format("HH:mmA")} - {moment.unix(item?.end).format("HH:mmA")}
                 </div>
-                <div className='justify-center items-center'><text className='justify-center text-12 text-red-400'>{item?.desc}</text></div>
-                <div className='justify-center items-center'> <text className='justify-center text-12 text-[#817C7C]'>{ethers.utils.formatEther(item?.fee)} Matic</text></div>
+                <div className='justify-center items-center'><p className='justify-center text-12 text-red-400'>{item?.desc}</p></div>
+                <div className='justify-center items-center'> <p className='justify-center text-12 text-[#817C7C]'>{ethers.utils.formatEther(item?.fee)} Matic</p></div>
                 <div className=' items-center pr-7 justify-end'>
-                  <div onClick={() => handleCreate(item?.host, item?.index, item?.fee)} className=' text-white cursor-pointer font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold bg-green-600  py-2 pl-5  text-[14px]'>
-                    {loading ? "Loading ..." : "Book Session"}
-                  </div>
+                  {me?.role == "User" ?
+                    <div onClick={() => handleCreate(item?.host, item?.index, item?.fee)} className={`text-white  cursor-pointer font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold bg-green-600  py-2 pl-5  text-[14px]`}>
+                      {loading ? "Loading ..." : "Book Session"}
+                    </div>
+                    :
+                    <div className={`text-white disabled:opacity-70 bg-gray-700 font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold py-2 pl-5  text-[14px]`}>
+                      {loading ? "Loading ..." : "Book Session"}
+                    </div>
+                  }
                 </div></div>
             </div>
           </div>
