@@ -1,18 +1,18 @@
 /**
+ *Submitted for verification at polygonscan.com on 2022-11-12
+*/
+
+/**
  *Submitted for verification at polygonscan.com on 2022-11-04
 */
 
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.7;
-// import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
 
-interface KeeperCompatibleInterface {
-    function checkUpkeep(bytes calldata checkData) external returns (bool upkeepNeeded, bytes memory performData);
-    function performUpkeep(bytes calldata performData) external;
-}
+// import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
-contract XTELPT is  KeeperCompatibleInterface {
+contract XTELPT  {
     address owner;
 
     enum XTELPState {
@@ -21,11 +21,9 @@ contract XTELPT is  KeeperCompatibleInterface {
     }
 
     uint public counter;    
-    // Use an i_interval in seconds and a timestamp to slow execution of Upkeep
-    uint256 private immutable i_interval;
-    uint public s_lastTimeStamp;
-    uint public v_lastTimeStamp;
-
+    // Use an interval in seconds and a timestamp to slow execution of Upkeep
+    uint public immutable interval;
+    uint public lastTimeStamp;
 
     /* string User Types */
     string userType = "User";
@@ -119,14 +117,12 @@ contract XTELPT is  KeeperCompatibleInterface {
      * @dev constructor used to assign values that will not change
      */
     constructor() {
+        owner =  msg.sender;
       
-        s_lastTimeStamp = block.timestamp;
-        v_lastTimeStamp = block.timestamp;
+        lastTimeStamp = block.timestamp;
         s_xtelpState[msg.sender] = XTELPState.OPEN;
         volunState[msg.sender] = XTELPState.OPEN;
-        i_interval = 43200;
-
-        owner =  msg.sender;
+        interval = 300;
     }
 
 
@@ -238,8 +234,6 @@ contract XTELPT is  KeeperCompatibleInterface {
         Campaign[_id].volunteer.push(msg.sender);
     } 
     
-
-
     /**
      * @dev This function `endCampaign` allows only the User end the campaign
      */
@@ -248,54 +242,16 @@ contract XTELPT is  KeeperCompatibleInterface {
        Campaign[_id].end_time = block.timestamp;
     }
 
-
-
     /**
-     * @dev This is the function that the Chainlink Keeper nodes call
-     * they look for `upkeepNeeded` to return True.
-     * the following should be true for this to return true:
-     * 1. It makes sure that the campaign or meeting is not yet completed
-     * 2. The time interval has passed for either meeting or campaign.
+     * @dev This function `endMeeting` is called by chainlink automation cron job and ends every meeting by setting the completed status to true
      */
-   
-   function checkUpkeep(bytes memory /* checkData */) public view override returns ( bool upkeepNeeded,
-    bytes memory /* performData */  ) {
-        
-        for (uint i = 0; i < AllAccount.length; i++) {
-            for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) {
-                if(Meeting[AllAccount[i]][j].time > 0 && Meeting[AllAccount[i]][j].completed == false){
-                    bool isOpen = XTELPState.OPEN == s_xtelpState[msg.sender];
-                    bool timePassed = ((block.timestamp - s_lastTimeStamp) > i_interval);
-                    upkeepNeeded = (isOpen && timePassed);
-                }
-                
-            }
-        }
-       
-    }
-
-    /**
-     * @dev Once `checkUpkeep` is returning `true`, this function is called
-     */
-    function performUpkeep(bytes calldata /*performData*/) external override {
-
-        for (uint i = 0; i < AllAccount.length; i++) {
-            for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) {
-               (bool upkeepNeeded, ) = checkUpkeep("");
-                require(upkeepNeeded, "Doesn't meet requirement for UpKeep");
-
-                s_lastTimeStamp = block.timestamp;
-
-                address payable host = Meeting[AllAccount[i]][j].host;
-                host.transfer(Meeting[AllAccount[i]][j].fee);
-
+    function endMeeting() public {
+         for (uint i = 0; i < AllAccount.length; i++) {
+            for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) { 
                 Meeting[AllAccount[i]][j].completed = true;
-                s_xtelpState[AllAccount[i]] = XTELPState.CLOSED;
+                lastTimeStamp = block.timestamp;
             }
         }
-        
-        
-        
     }
    
    
