@@ -25,7 +25,7 @@ const Connected = () => {
                     <div onClick={() => router.push('/iframe')} className='mr-[20px] cursor-pointer leading-[10px] '>FAQ</div>
                 </div>
                 <div >
-                    {!me ? (
+                    {!me?.role ? (
                         <InitAccount />
                     ) : (
                         <div className='flex'>
