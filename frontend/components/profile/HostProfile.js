@@ -53,7 +53,7 @@ const Profile = () => {
                 <Image src={Ellipse} height={5} width={5} />
               </div>
               {host?.role == "Host" && (
-                <div className='text-white text-10'>{me?.hostTitle}</div>
+                <div className='text-white text-10'>{host?.hostTitle}</div>
               )}
             </div>
             <div className='font-noto text-12 mt-1 text-[#817C7C]'>{host?.bio}</div>

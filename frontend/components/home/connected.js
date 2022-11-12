@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import Image from 'next/image'
-import ProfileP from '../../assets/profle-p.png'
 import Logo from '../../assets/Logo.png'
-import Notification from '../../container/notification';
 import { useRouter } from "next/router";
 import { XContext } from '../../context/XContext';
 import NewCampaign from '../../container/newCampaign';

@@ -85,11 +85,11 @@ const Host = () => {
                     )}...
                   </div>
                   <div className='flex font-noto font-semibold mt-[10px] leading-[14px] text-[14px]'>
-                    <div className='text-white'>{item.role}   </div>
-                    <div className='w-[5px] h-[5px] -mt-[2px]'>
-                      <Image src={Ellipse} className='h-[5px] text-[#D9D9D9] w-[5px]' height={5} width={5} />
+                    <div className='text-green-400'>{item.role}   </div>
+                    <div className='w-5 pl-2 h-5 -mt-1'>
+                      <Image src={Ellipse} height={5} width={5} />
                     </div>
-                    <div className='text-white'>  Therapist</div>
+                    <div className='text-white'>{item.hostTitle}</div>
                   </div>
                   <div className='text-[10px] leading-[14px] mt-[15px] text-[#817C7C]'>{item.bio}</div>
                 </div>
