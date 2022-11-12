@@ -12,7 +12,7 @@ const Main = () => {
             <div className='flex-1 bg-hero bg-bottom bg-no-repeat'>
                 <div className='absolute items-center w-full flex justify-center pt-[100px]'>
 
-                    <Image src={HeroIcon} height={363} width={330} />
+                    <Image src={HeroIcon} height={363} width={400} />
                 </div>
                 <div className='mt-[250px] w-full text-center h-[550px] bg-[#D9D9D9] text-[50px]'>
                     <div className='font-bungee text-[65px] text-red-800 pt-[300px]'>You, The blockchain and the End user</div>
