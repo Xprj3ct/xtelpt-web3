@@ -4,7 +4,9 @@ import HeroIcon from '../../assets/3d 1.png'
 import LineA from '../../assets/Line 1.png'
 import LineB from '../../assets/Line 2.png'
 import Group9 from '../../assets/Group 9.png'
-import Phone from '../../assets/Antigravity.png'
+import privacy from '../../assets/privacy.png'
+import service from '../../assets/service.png'
+import campaign from '../../assets/campaign.png'
 
 const Main = () => {
     return (
@@ -24,24 +26,24 @@ const Main = () => {
                 </div>
                 <div className='grid place-items-center w-full mt-[26px] flex-1'>
                     <div className='bg-[#2D1300] w-[815px] h-[503px] pl-4 pr-4 text-center shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] flex-col rounded-[60px] '>
-                        <div className='w-full text-center'>
-                            <Image src={Phone} height={210} width={220} />
+                        <div className='w-full pt-16 text-center'>
+                            <Image src={privacy} height={150} width={180} />
                         </div>
-                        <div className='font-noto text-[40px] text-white'>*Privacy:*</div>
+                        <div className='font-noto text-[40px] font-bold border-md border-gray-200 text-white'>Privacy</div>
                         <div className='font-noto text-[18px] h-[200] pt-10 text-white '>100% confidentiality is been secured from hosts to users on the network guaranteeing trust on disclosure of information</div>
                     </div>
                     <div className='bg-[#2D1300] w-[815px] text-center pl-4 pr-4 mt-10 h-[503px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] flex-col rounded-[60px] '>
-                        <div className='w-full text-center'>
-                            <Image src={Phone} height={210} width={220} />
+                        <div className='w-full pt-16 text-center'>
+                            <Image src={campaign} height={150} width={150} />
                         </div>
-                        <div className='font-noto text-[40px] text-white'>*Campaigns:*</div>
+                        <div className='font-noto text-[40px] font-bold border-md border-gray-200 text-white'>Campaigns</div>
                         <div className='font-noto text-[18px] h-[200] pt-10 text-white '>Free campaigns hosted on different mental health issues, making it safe for those that can't afford the fee of a host</div>
                     </div>
                     <div className='bg-[#2D1300] w-[815px] mt-10 h-[503px] pl-4 pr-4 text-center shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] flex-col rounded-[60px] '>
-                        <div className='w-full text-center'>
-                            <Image src={Phone} height={210} width={220} />
+                        <div className='w-full pt-16 text-center'>
+                            <Image src={service} height={150} width={150} />
                         </div>
-                        <div className='font-noto text-[40px] text-white'>*Services range:*</div>
+                        <div className='font-noto text-[40px] font-bold border-md border-gray-200 text-white'>Services range</div>
                         <div className='font-noto text-[18px] h-[200] pt-10 text-white '>On XTELPT there is a wide range of services that are offered as services by different host from any part of the world at anytime.</div>
                     </div>
                 </div>
