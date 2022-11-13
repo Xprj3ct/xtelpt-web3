@@ -1,7 +1,7 @@
 ![cover](./smart-contract/images/xtelptimg.jpeg)
  
 <p align="center">
-<a target="_blank" href="https://docs.soliditylang.org/"><img src="https://camo.githubusercontent.com/7f5dae68cf75e9fb9eb72a0209fffc19ae14175eb0073f7659ffee06b9656ac4/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f536f6c69646974792d2532333336333633362e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d736f6c6964697479266c6f676f436f6c6f723d7768697465"/></a> <a target="_blank" href="https://docs.chain.link/"><img src="https://camo.githubusercontent.com/df9365ae11c1678020c68db521a0a98522be0c065151e720e9ec4cf7624def50/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f436861696e6c696e6b2d3337354244323f7374796c653d666f722d7468652d6261646765266c6f676f3d436861696e6c696e6b266c6f676f436f6c6f723d7768697465" /></a><a target="_blank" href=""><img src=""/></a?
+<a target="_blank" href="https://docs.soliditylang.org/"><img src="https://camo.githubusercontent.com/7f5dae68cf75e9fb9eb72a0209fffc19ae14175eb0073f7659ffee06b9656ac4/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f536f6c69646974792d2532333336333633362e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d736f6c6964697479266c6f676f436f6c6f723d7768697465"/></a> <a target="_blank" href="https://docs.chain.link/"><img src="https://camo.githubusercontent.com/df9365ae11c1678020c68db521a0a98522be0c065151e720e9ec4cf7624def50/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f436861696e6c696e6b2d3337354244323f7374796c653d666f722d7468652d6261646765266c6f676f3d436861696e6c696e6b266c6f676f436f6c6f723d7768697465" /></a><a target="_blank" href="https://nextjs.org/docs/getting-started"><img src="https://img.shields.io/badge/NextJS-000000.svg?style=for-the-badge&logo=Vercel&labelColor=000"/></a?
 
 </p>
 <p align="center">
@@ -29,10 +29,11 @@ This <b>Project</b> was made possible with ```solidity```, ```hardhat```, ```cha
 - Creating Schedules for Hosts.
 
 ### LINKS 
-[Live Deployed]() <br/>
-[Contract]()
+[Live Deployed](https://xtelpt-web3-od5fiblal-xprj3ct.vercel.app) <br/>
+[Contract](https://mumbai.polygonscan.com/address/0x3C8472f1934f9a09c55041f325aBE528AfCb1388)
 > **Note**
 > Wallet must be Connected to access any feature.
+> Currently on ```Mumbai Faucet```.
 
 ## Usage
 ### How it works for Host:<br/>
@@ -53,6 +54,17 @@ This <b>Project</b> was made possible with ```solidity```, ```hardhat```, ```cha
 
 
 ## Issues
-This repository is maintained actively, so if you face any issue please <a href="https://github.com/Xprj3ct/xtelpt-web3/issues/new">raise an issue</a>.
+- Some of the packages we felt were ```NextJS``` fit for the project were depreciated versions so we had to stress a little in finding other best packages
+- Creating a custom room for different peers - With the help of the ```Huddle01``` docs we were able to overcome this challenge by creating a separate roomId prop for best usage.
+- Trying to do the custom logic ```Chainlink keepers automation```, which was later swapped out for time based logic automation as it was what we needed.
+- Return a mapping in ```solidity```, which I finally resolved to return a struct.
+- Verifying my smart contract where I could not paste a code if I import a library as a single file.
+- ```Ethers``` as when I reload a page I get "INVALID address ENS name error" which was fixed by properly using the useeffect.
 
 ## Lesson and Remarks 
+> Proper use of ```for loop``` in ```solidity```.
+> Usage of ```keccak256 solidity hashing``` to compare string in ```solidity```.
+> Usage of ```EthersJS`` to interact with smart contract which include reading and writing, items like signers and providers.
+> Custom hooks in ```NextJS```.
+> Keeping track of States and manipulating them to get Best UI flow.
+> Creating a Dynamic url in ```NextJs```.
