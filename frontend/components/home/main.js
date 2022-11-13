@@ -55,16 +55,30 @@ const Main = () => {
                     </div>
                     <div className='flex w-100 justify-between p-20'>
                         <div className='bg-[#2D1300] mt-[76px] rounded-[30px] w-1/4 h-[273px]'>
-                            <div className='font-noto text-[30px] pt-6 mb-4 text-center text-white'>CAMPAIGNS</div>
-                            <div className='text-[18px] font-noto text-center text-white'>Explanations on the reason and the benefits our services provides</div>
+                            <div className='font-noto text-[24px] pt-6 mb-4 text-center text-white'>CAMPAIGNS</div>
+                            <div className='text-[12px] font-noto list-disc pl-2 text-start text-gray-200'>
+                                    <li>Navigate to campaign at the top bar and click on it</li>
+                                    <li>Search for specifics campaign or scroll down and click Get Help</li>
+                                    <li>The system automatically merges you with a Host and a call link will be in your notification</li>
+                                    <li> click it and wait for prompts.</li>
+                                    <li> Voila your meeting has started.</li>
+                            </div>
                         </div>
                         <div className='bg-[#2D1300] mt-[76px] rounded-[30px] w-1/4 h-[273px]'>
-                            <div className='font-noto text-[30px] pt-6 mb-4 text-center text-white'>HOSTS</div>
-                            <div className='text-[18px] font-noto text-center  text-white'>Explanations on the reason and the benefits our services provides</div>
+                            <div className='font-noto text-[24px] pt-6 mb-4 text-center text-white'>HOSTS</div>
+                            <div className='text-[11px] font-noto list-disc pl-2 text-start text-gray-200'>
+                                    <li>On opening of XTELPT and connecting of wallet, toggle on the host button to become a host while signing up.</li>
+                                    <li>Edit your profile based on your professionalism</li>
+                                    <li>Set Schedule based on your preferred time and fee </li>
+                                    <li>Voluteer as a host on campaign(non-paid service)</li>
+                                    <li>Get all meeting schedule on the notification bar, wait for time and click on it and start meeting. </li>
+                            </div>
                         </div>
                         <div className='bg-[#2D1300] mt-[76px] rounded-[30px] w-1/4 h-[273px]'>
-                            <div className='font-noto text-[30px] pt-6 mb-4 text-center text-white'>USERS</div>
-                            <div className='text-[18px] font-noto  text-center text-white'>Explanations on the reason and the benefits our services provides</div>
+                            <div className='font-noto text-[30px] pt-6 mb-4 text-center text-white'>COMMUNITY</div>
+                            <div className='text-[12px] font-noto list-disc pl-2 text-start text-gray-200'>
+                            xtelpt is enacting a reward gifting system for uncoerced individuals for being in stilt to others and sharing remedies for them in times of need in the community , xtelpt communites  will serve as a trestle for mental health awareness programs where individuals can obliterate self-stigmatization, learning from previous experiences and getting to see ratified solutions of near same  problem they are facing.  
+                            </div>
                         </div>
                     </div>
                 </div>
