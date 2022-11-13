@@ -120,8 +120,8 @@ const Auth = () => {
             </label>
           </div>
           {newHost ? <input onChange={(e) => setHostTitle(e.target.value)} className='w-[426px] h-[50px] bg-transparent rounded-[12px] text-white border-2 pl-2' placeholder='Host Type?' /> : null}
-          <textarea onChange={(e) => setBio(e.target.value)} maxLength="130" className='w-[426px] h-[221px] rounded-[12px] text-white bg-transparent border-2 px-2' placeholder='Bio' />
-          <div onClick={handleCreate} className='font-noto bg-[#755204] cursor-pointer text-[14px] h-[41px] rounded-[12px] text-center px-2 py-2 w-[150px] text-white'>{loading ? "Loading ..." : "Create Profile"}</div>
+          <textarea onChange={(e) => setBio(e.target.value)} maxLength="40" className='w-[426px] h-[221px] rounded-[12px] text-white bg-transparent border-2 px-2' placeholder='Bio' />
+          <div onClick={handleCreate} className='font-noto bg-[#755204] hover:bg-gray-500 cursor-pointer text-[14px] h-[41px] rounded-[12px] text-center px-2 py-2 w-[150px] text-white'>{loading ? "Loading ..." : "Create Profile"}</div>
           <br />
           <br />
         </div>
