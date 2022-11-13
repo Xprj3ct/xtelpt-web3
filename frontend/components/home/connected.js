@@ -30,8 +30,8 @@ const Connected = () => {
                             <div onClick={() => router.push('/profile')} className='bg-[#A77300] hover:bg-gray-500 flex  px-3 font-noto cursor-pointer font-semibold  mt-[57px] w-[120px] h-[40px] text-center rounded-[10px]'>
                                 <Image className='rounded-full p-4' src={`https://gateway.pinata.cloud/ipfs/${me?.profilePic}`} height={30} width={30} />
                                 <div className='text-[12px] flex-1'>
-                                    <div>{me?.name.slice(0, 7)}...</div>
-                                    {currentAccount.slice(0, 6)}...
+                                    <div>{me?.name.slice(0, 6)}..</div>
+                                    {currentAccount.slice(0, 6)}..
                                 </div>
                             </div>
                             {/* <div title='Disconnect Wallet' className='text-[12px] mt-[65px] ml-4 cursor-pointer font-noto hover:text-red-700 text-gray-500 text-right underline'>Disconnect</div> */}

@@ -100,6 +100,7 @@ const Auth = () => {
     }
 
   }
+  
 
   return (
     <div className='bg-[#252525]'>
