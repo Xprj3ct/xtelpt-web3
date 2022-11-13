@@ -216,7 +216,7 @@ contract XTELPT  {
     }
 
     /**
-     * @dev This function `getHelo` allows only the User to call it hence the `OnlyUser` modifier
+     * @dev This function `getHelp` allows only the User to call it hence the `OnlyUser` modifier
      * after which the Campaign ID is specified and the user would be assigned to the Campaign
      */
     function getHelp(uint256 _id) public onlyUser {
@@ -250,6 +250,15 @@ contract XTELPT  {
                 lastTimeStamp = block.timestamp;
             }
         }
+    }
+
+    /**
+     * @dev This function `editCampaign` can only be called by the owner of the smart contract to make changes to th campaign that is still active
+     */
+    function editCampaign(uint256 _id, string memory _name, string memory _desc, string memory _image) public onlyOwner {
+        Campaign[_id].name = _name;
+        Campaign[_id].image = _image;
+        Campaign[_id].desc = _desc;
     }
    
    

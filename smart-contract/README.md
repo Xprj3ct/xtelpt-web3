@@ -111,7 +111,18 @@ function endMeeting() public {
     }
 ```
 
-### 9.  Getter Functions
+### 8.  Edit Campaign only owner
+This function can only be called by the owner of the smart contract to make changes to th campaign that is still active
+
+```
+function editCampaign(uint256 _id, string memory _name, string memory _desc, string memory _image) public onlyOwner {
+    Campaign[_id].name = _name;
+    Campaign[_id].image = _image;
+    Campaign[_id].desc = _desc;
+}
+```
+
+### 10.  Getter Functions
 This is used to get variables, struct which the frontend can interact with.
 
 <h4>Liked the work ?</h4>

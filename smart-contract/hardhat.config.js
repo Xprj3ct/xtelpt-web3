@@ -8,12 +8,6 @@ require("dotenv").config()
 // require("./tasks")
 require("dotenv").config()
 
-const MAINNET_RPC_URL = process.env.MAINNET_RPC_URL || process.env.ALCHEMY_MAINNET_RPC_URL || "https://eth-mainnet.alchemyapi.io/v2/your-api-key"
-
-const POLYGON_MAINNET_RPC_URL = process.env.POLYGON_MAINNET_RPC_URL || "https://polygon-mainnet.alchemyapi.io/v2/your-api-key"
-
-const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL || "https://eth-goerli.alchemyapi.io/v2/your-api-key"
-
 const POLYGON_MUMBAI_RPC_URL = process.env.POLYGON_MUMBAI_RPC_URL || "https://soft-morning-shard.matic-testnet.discover.quiknode.pro/0492e50bbcc828ab0be06f4f253a199d63742bd3/"
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY
@@ -49,30 +43,7 @@ module.exports = {
     localhost: {
       chainId: 31337,
     },
-    goerli: {
-      url: GOERLI_RPC_URL,
-      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-      //   accounts: {
-      //     mnemonic: MNEMONIC,
-      //   },
-      blockConfirmation: 2,
-      chainId: 5,
-    },
-    mainnet: {
-      url: MAINNET_RPC_URL,
-      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-      //   accounts: {
-      //     mnemonic: MNEMONIC,
-      //   },
-      blockConfirmation: 2,
-      chainId: 1,
-    },
-    polygon: {
-      url: POLYGON_MAINNET_RPC_URL,
-      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-      blockConfirmation: 2,
-      chainId: 137,
-    },
+
     mumbai: {
       url: POLYGON_MUMBAI_RPC_URL,
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],

@@ -16,8 +16,7 @@ const NewModal = () => {
   const text = router.query.text
   const type = router.query.type
 
-  const [hostSearch, setHostSearch] = useState()
-  const [camp, setCamp] = useState()
+  const [search, setSearch] = useState()
 
   const { xtelptAddress } = useContext(XContext)
 
@@ -41,11 +40,29 @@ const NewModal = () => {
 
       console.log("arr", arr)
 
-      setHostSearch(arr)
+      setSearch(arr)
     }
 
-    if (type == "campaign") {
+    if (type == "Camp") {
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const xtelptContract = new ethers.Contract(xtelptAddress, abi, provider)
 
+      const allCamp = await xtelptContract.getCampaign()
+      // console.log(allCamp)
+
+      let arr = []
+
+      for (let i = 0; i < allCamp.length; i++) {
+
+        if (allCamp[i].name.toLowerCase() == text.toLowerCase()) {
+          arr.push(allCamp[i])
+        }
+      }
+
+      // console.log("arr", arr)
+
+      setSearch(arr)
+      console.log("search", search)
     }
   }
 
@@ -67,10 +84,10 @@ const NewModal = () => {
       <div className='bg-[#252525] h-screen w-full flex-1'>
         <Header />
 
-        <div class="flex justify-center flex-col items-center gap-5 mt-20">
+        <div className="flex justify-center flex-col items-center gap-5 mt-20">
           <h1 className='text-2xl text-center text-white font-bold'>Search Result</h1>
 
-          {hostSearch?.map((item) => (
+          {search?.map((item) => (
             <div key={`${item?.addr}`} className='flex justify-center pb-10 w-full '>
               <div className='bg-[#2D1300] w-1/2 h-full shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
                 <div className='flex justify-between p-6 '>
@@ -86,7 +103,7 @@ const NewModal = () => {
               </div>
             </div>
           ))}
-          {hostSearch?.length == 0 && (
+          {search?.length == 0 && (
 
             <div className='flex justify-center pb-10 w-full '>
               <div className='bg-[#2D1300] w-1/2 h-full shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
@@ -103,7 +120,7 @@ const NewModal = () => {
         </div>
 
       </div>
-    </div>
+    </div >
 
   );
 }
