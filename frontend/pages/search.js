@@ -15,22 +15,15 @@ const NewModal = () => {
   const router = useRouter()
   const text = router.query.text
   const type = router.query.type
-
-  const [hostSearch, setHostSearch] = useState()
-  const [camp, setCamp] = useState()
-
-  const { xtelptAddress } = useContext(XContext)
-
+  const [search, setSearch] = useState()
+  const { xtelptAddress, me } = useContext(XContext)
   const updateUIValues = async () => {
     if (type == "Host") {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const xtelptContract = new ethers.Contract(xtelptAddress, abi, provider)
-
       const allHost = await xtelptContract.getAllAccount()
       console.log(allHost)
-
       let arr = []
-
       for (let i = 0; i < allHost.length; i++) {
         let prof = await xtelptContract.getProfile(allHost[i])
         console.log(prof.name.toLowerCase() == text.toLowerCase())
@@ -38,25 +31,57 @@ const NewModal = () => {
           arr.push(prof)
         }
       }
-
       console.log("arr", arr)
-
-      setHostSearch(arr)
+      setSearch(arr)
     }
-
-    if (type == "campaign") {
-
+    if (type == "Camp") {
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const xtelptContract = new ethers.Contract(xtelptAddress, abi, provider)
+      const allCamp = await xtelptContract.getCampaign()
+      // console.log(allCamp)
+      let arr = []
+      for (let i = 0; i < allCamp.length; i++) {
+        if (allCamp[i].name.toLowerCase() == text.toLowerCase()) {
+          arr.push(allCamp[i])
+        }
+      }
+      // console.log("arr", arr)
+      setSearch(arr)
+      console.log("search", search)
     }
   }
-
-
   useEffect(() => {
     setTimeout(() => {
       updateUIValues()
     }, 1000);
   }, [type, text])
-
-
+  const handleVolun = async (id) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner();
+    const xtelptContract = new ethers.Contract(xtelptAddress, abi, signer)
+    try {
+      const joinCampaign = await xtelptContract.joinCampaign(id)
+      console.log(joinCampaign)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const handleHelp = async (id) => {
+    setLoading(true)
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner();
+    const xtelptContract = new ethers.Contract(xtelptAddress, abi, signer)
+    try {
+      const getHelp = await xtelptContract.getHelp(id)
+      console.log(getHelp)
+      router.push({
+        pathname: '/call',
+        query: { addr: me?.addr },
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -66,46 +91,62 @@ const NewModal = () => {
       </Head>
       <div className='bg-[#252525] h-screen w-full flex-1'>
         <Header />
-
-        <div class="flex justify-center flex-col items-center gap-5 mt-20">
-          <h1 className='text-2xl text-center text-white font-bold'>Search Result</h1>
-
-          {hostSearch?.map((item) => (
+        <div className="flex justify-center flex-col items-center gap-5 mt-10">
+          <h1 className='text-2xl text-center text-white font-bold mb-10'>Search Result For {router.query.text}</h1>
+          {search?.map((item) => (
             <div key={`${item?.addr}`} className='flex justify-center pb-10 w-full '>
               <div className='bg-[#2D1300] w-1/2 h-full shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
                 <div className='flex justify-between p-6 '>
                   <div className='justify-start pl-6 font-noto font-semibold text-[#817C7C] w-34 text-12'>
-                    <Image src={`https://gateway.pinata.cloud/ipfs/${item?.profilePic}`} height={50} width={50} className="rounded-full" />
+                    {router.query.type == "Host" ? (
+                      <Image src={`https://gateway.pinata.cloud/ipfs/${item?.profilePic}`} height={50} width={50} className="rounded-full" />
+                    ) : (
+                      <Image src={`https://gateway.pinata.cloud/ipfs/${item?.image}`} height={50} width={50} className="rounded-full" />
+                    )}
                   </div>
-                  <div className='justify-center items-center'><p className='justify-center items-center text-2xl text-red-400'>{item?.name} - <span className='text-white'>{item?.hostTitle}</span></p></div>
+                  <div className='justify-center items-center'>
+                    <p className='justify-center items-center text-2xl mt-2 text-red-400'>{item?.name}
+                      {router.query.type == "Host" && (
+                        <span className='text-white'>- {item?.hostTitle}
+                        </span>)}
+                    </p>
+                  </div>
                   <div className=' items-center pr-7 justify-end'>
-                    <div className=' text-white cursor-pointer font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold bg-green-600  py-2 pl-5  text-[14px]'>
-                      View Profile
-                    </div>
+                    {router.query.type == "Host" ? (
+                      <div className=' text-white cursor-pointer font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold bg-green-600  py-2 pl-5  text-[14px]'>
+                        View Profile
+                      </div>)
+                      : (
+                        <>
+                          {me?.role == "Host" ? (
+                            <div onClick={() => handleVolun(item?.index)} className=' text-white cursor-pointer font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold bg-green-600  py-2 pl-5  text-[14px]'>
+                              Volunteer
+                            </div>
+                          )
+                            : (
+                              <div onClick={() => handleHelp(item?.index)} className={`flex text-white cursor-pointer ${item?.volunteer.length == 0 && ('disabled:opacity-70 bg-gray-700')} font-noto rounded-[10px] h-[40px] w-[114px] text-center font-semibold bg-[#A77300] mt-[10px] py-2 pl-[16px] text-[16px]`}>
+                                Get Help
+                              </div>
+                            )}
+                        </>
+                      )}
                   </div></div>
               </div>
             </div>
           ))}
-          {hostSearch?.length == 0 && (
-
+          {search?.length == 0 && (
             <div className='flex justify-center pb-10 w-full '>
               <div className='bg-[#2D1300] w-1/2 h-full shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
                 <div className='flex justify-between p-6 '>
-
                   <div className='justify-center items-center'><p className='justify-center text-center items-center text-2xl  text-white'>Nothing to Show Here</p></div>
                   <div className=' items-center pr-7 justify-end'>
-
                   </div></div>
               </div>
             </div>
           )}
-
         </div>
-
       </div>
-    </div>
-
+    </div >
   );
 }
-
 export default NewModal

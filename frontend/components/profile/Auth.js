@@ -107,7 +107,11 @@ const Auth = () => {
       <div className='bg-hero bg-right w-full bg-no-repeat flex h-screen'>
         <div className='grid w-full place-items-center'>
           <div className='text-[32px] font-noto text-white font-semibold'>Edit Profile details</div>
+          {file ?
+            <Image src={URL.createObjectURL(file)} width="100px" height="100px" className='rounded-full border-x-white border-r-2' />
+            :
           <Image src={ProfileImage} />
+          }
           <input type="file" onChange={(event) => setFile(event.target.files[0])} className='border-[#EAEDEE] rounded-[12px] text-white w-[426px] py-2 px-2 h-[50px] border-2' accept="image/*" />
           <input onChange={(e) => setName(e.target.value)} maxLength="130" className='w-[426px] h-[50px] bg-transparent rounded-[12px] text-white border-2 pl-2' placeholder='Fullname' />
           {/* Host Toggle */}

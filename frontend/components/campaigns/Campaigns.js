@@ -99,7 +99,7 @@ const Campaigns = () => {
                 </div>
                 {me?.role == "Host" && (
                   <div className='flex items-center w-full justify-center mt-[32px]'>
-                    <div className='flex text-white cursor-pointer font-noto rounded-[10px] h-[40px] w-[114px] text-center font-semibold bg-green-700 hover:bg-gray-500 py-2 pl-[16px] text-[16px]' onClick={() => handleVolun(item?.index)}>Voluteer</div>
+                    <div className='flex text-white cursor-pointer font-noto rounded-[10px] h-[40px] w-[114px] text-center font-semibold bg-green-700 hover:bg-gray-500 py-2 pl-[16px] text-[16px]' onClick={() => handleVolun(item?.index)}>Volunteer</div>
                   </div>
                 )}
 
