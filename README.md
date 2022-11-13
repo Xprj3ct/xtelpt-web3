@@ -29,17 +29,27 @@ This <b>Project</b> was made possible with ```solidity```, ```hardhat```, ```cha
 - Creating Schedules for Hosts.
 
 ### LINKS 
-[Deployed]()
+[Live Deployed]() <br/>
 [Contract]()
+> **Note**
+> Wallet must be Connected to access any feature.
 
 ## Usage
 ### How it works for Host:<br/>
-
+- On opening of XTELPT and connecting of wallet, toggle on the host button to become a host while signing up.
+- Edit your profile based on your professionalism.
+- Set Schedule based on your preferred time and fee.
+- Voluteer as a host on campaign(non-paid service)
+- Get all meeting schedule on the notification bar, wait for time and click on it and start meeting.
 
 ### How Campaign Works:<br/>
+- Navigate to campaign at the top bar and click on it.
+- Search for specifics campaign or scroll down and click Get Help.
+- The system automatically merges you with a Host and a call link will be in your notification.
+- click and wait for prompts.
 
-
-### How it works for Users:<br/>
+### Incoming Community Feature:<br/>
+- xtelpt is enacting a reward gifting system for uncoerced individuals for being in stilt to others and sharing remedies for them in times of need in the community , xtelpt communites will serve as a trestle for mental health awareness programs where individuals can obliterate self-stigmatization, learning from previous experiences and getting to see ratified solutions of near same problem they are facing.
 
 
 ## Issues
