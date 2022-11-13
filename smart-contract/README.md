@@ -98,7 +98,7 @@ endCampaign(address _user, uint256 _id)
 
 ### 8.  End meeting function called by chainlink automation
 This is the ```chainlink``` automation function which is called every 24hrs.
-<a href="https://automation.chain.link/mumbai/12608492109755611185361602819699981758653490897916939082342476465275548388940" target="_blank">Link</a> to the automation 
+<a href="https://automation.chain.link/mumbai/15126042871348539617950456361182166757342351262351933592710991110229343694907" target="_blank">Link</a> to the automation 
 
 ```
 function endMeeting() public {
@@ -111,7 +111,7 @@ function endMeeting() public {
     }
 ```
 
-### 8.  Edit Campaign only owner
+### 9.  Edit Campaign only owner
 This function can only be called by the owner of the smart contract to make changes to th campaign that is still active
 
 ```
