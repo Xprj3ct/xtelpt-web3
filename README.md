@@ -62,9 +62,9 @@ This <b>Project</b> was made possible with ```solidity```, ```hardhat```, ```cha
 - ```Ethers``` as when I reload a page I get "INVALID address ENS name error" which was fixed by properly using the useeffect.
 
 ## Lesson and Remarks 
-> Proper use of ```for loop``` in ```solidity```.
-> Usage of ```keccak256 solidity hashing``` to compare string in ```solidity```.
-> Usage of ```EthersJS`` to interact with smart contract which include reading and writing, items like signers and providers.
-> Custom hooks in ```NextJS```.
-> Keeping track of States and manipulating them to get Best UI flow.
-> Creating a Dynamic url in ```NextJs```.
+- Proper use of ```for loop``` in ```solidity```.
+- Usage of ```keccak256 solidity hashing``` to compare string in ```solidity```.
+- Usage of ```EthersJS`` to interact with smart contract which include reading and writing, items like signers and providers.
+- Custom hooks in ```NextJS```.
+- Keeping track of States and manipulating them to get Best UI flow.
+- Creating a Dynamic url in ```NextJs```.
