@@ -33,7 +33,7 @@ This <b>Project</b> was made possible with ```solidity```, ```hardhat```, ```cha
 - Campaign can only be added through the contract.
 
 ### LINKS 
-[Live Deployed](https://xtelpt-web3-od5fiblal-xprj3ct.vercel.app) <br/>
+[Live Deployed](https://xtelpt-web3.vercel.app/) <br/>
 [Contract](https://mumbai.polygonscan.com/address/0x3C8472f1934f9a09c55041f325aBE528AfCb1388)
 > **Note**
 > Wallet must be Connected to access any feature.

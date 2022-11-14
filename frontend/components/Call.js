@@ -1,9 +1,10 @@
 import Image from 'next/image'
-
+import Profile from '../../assets/profle-p.png'
+import Notification from '../../container/notification'
 import { BsMicFill, BsSoundwave } from 'react-icons/bs'
 import { MdAddReaction, MdCable, MdCall } from 'react-icons/md'
 import React, { useEffect, useContext, useRef, useState } from "react";
-import { XContext } from "../context/XContext";
+import { XContext } from "../../context/XContext";
 import {
   HuddleClientProvider,
   getHuddleClient,
@@ -11,7 +12,7 @@ import {
 } from "@huddle01/huddle01-client";
 import PeerVideoAudioElem from "./PeerVideoAudioElem";
 import { useRouter } from 'next/router'
-import useProfile from '../hooks/useProfile'
+import useProfile from '../../hooks/useProfile'
 
 const Call = () => {
   const router = useRouter()
@@ -75,10 +76,10 @@ const Call = () => {
                 <div className='w-[228px] flex h-[236px] ml-[12px] mt-3 rounded-full bg-[#D9D9D9BF]'>
                   <div className='pt-1 pl-[6px] '>
                     {me?.role == "Host" && (
-                      <Image src={userProfile?.profilePic} className='rounded-full' height={225} width={214} />
+                      <Image src={`https://gateway.pinata.cloud/ipfs/${userProfile?.profilePic}`} className='rounded-full' height={225} width={214} />
                     )}
                     {me?.role == "User" && (
-                      <Image src={hostProfile?.profilePic} className='rounded-full' height={225} width={214} />
+                      <Image src={`https://gateway.pinata.cloud/ipfs/${hostProfile?.profilePic}`} className='rounded-full' height={225} width={214} />
                     )}
                   </div>
                 </div>
