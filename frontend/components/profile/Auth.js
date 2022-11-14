@@ -110,7 +110,7 @@ const Auth = () => {
           {file ?
             <Image src={URL.createObjectURL(file)} width="100px" height="100px" className='rounded-full border-x-white border-r-2' />
             :
-          <Image src={ProfileImage} />
+          <Image src={ProfileImage} width="100px" height="100px" />
           }
           <input type="file" onChange={(event) => setFile(event.target.files[0])} className='border-[#EAEDEE] rounded-[12px] text-white w-[426px] py-2 px-2 h-[50px] border-2' accept="image/*" />
           <input onChange={(e) => setName(e.target.value)} maxLength="130" className='w-[426px] h-[50px] bg-transparent rounded-[12px] text-white border-2 pl-2' placeholder='Fullname' />

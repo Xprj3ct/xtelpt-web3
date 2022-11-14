@@ -40,7 +40,7 @@ const Profile = () => {
 
 
   return (
-    <div className='grid place-items-center h-screen w-full'>
+    <div className='bg-hero bg-no-repeat bg-right grid place-items-center h-screen w-full'>
       <div className='flex justify-center mb-10 w-full '>
         <div className='bg-[#2D1300] w-1/3 h-90 shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
           <div className='grid place-items-center mt-6 w-full'>
@@ -53,12 +53,11 @@ const Profile = () => {
                 <Image src={Ellipse} height={5} width={5} />
               </div>
               {host?.role == "Host" && (
-                <div className='text-white text-10'>{host?.hostTitle}</div>
+                <div className='text-white text-10'>{me?.hostTitle}</div>
               )}
             </div>
             <div className='font-noto text-12 mt-1 text-[#817C7C]'>{host?.bio}</div>
             <div className='flex items-center w-full justify-center mt-[8px] cursor-pointer'>
-
 
               <div
                 onClick={() => router.push({

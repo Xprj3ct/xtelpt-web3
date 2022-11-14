@@ -10,11 +10,14 @@
 </p>
 
 <p align="center">
-<a href="#introduction">Frameworks and APis</a> &nbsp;&bull;&nbsp;
+<a href="#Frameworks & API's">Frameworks and APis</a> &nbsp;&bull;&nbsp;
 <a href="#usage">Usage</a> &nbsp;&bull;&nbsp;
-<a href="#issue">Issues?</a>&nbsp;&bull;&nbsp;
+<a href="#issues">Issues?</a>&nbsp;&bull;&nbsp;
 <a href="#documentation">Lesson and Remarks</a> &nbsp;&bull;&nbsp;
 </p>
+
+> **Note**
+> Refer to the ```Frontend``` & ```Smart Contract``` Folder ReadME, for specific tools usage.
 
 # Frameworks & API's
 This <b>Project</b> was made possible with ```solidity```, ```hardhat```, ```chainlink```, ```quicknode```, ```IPFS```, ```NextJS```, ```HUDDLE01```, ```Polygon```, ```Git```, ```Chai```, ```EtherJS```, and ```Figma```. It's has features such as:
@@ -27,6 +30,7 @@ This <b>Project</b> was made possible with ```solidity```, ```hardhat```, ```cha
 - A Decentralized WEBRTC for calls.
 - Notification.
 - Creating Schedules for Hosts.
+- Campaign can only be added through the contract.
 
 ### LINKS 
 [Live Deployed](https://xtelpt-web3-od5fiblal-xprj3ct.vercel.app) <br/>
@@ -64,7 +68,7 @@ This <b>Project</b> was made possible with ```solidity```, ```hardhat```, ```cha
 ## Lesson and Remarks 
 - Proper use of ```for loop``` in ```solidity```.
 - Usage of ```keccak256 solidity hashing``` to compare string in ```solidity```.
-- Usage of ```EthersJS`` to interact with smart contract which include reading and writing, items like signers and providers.
+- Usage of ```EthersJS``` to interact with smart contract which include reading and writing, items like signers and providers.
 - Custom hooks in ```NextJS```.
 - Keeping track of States and manipulating them to get Best UI flow.
 - Creating a Dynamic url in ```NextJs```.
