@@ -118,12 +118,12 @@ const Campaigns = () => {
                   <div className='font-noto text-center font-semibold text-[#817C7C] leading-[14px] mt-4 text-[16px]'>{item?.desc}.</div>
                   <div className='flex items-center w-full justify-center mt-[42px]'>
                     {me?.role == "User" && (
-                      <div onClick={() => handleHelp(item?.index)} className={`flex text-white cursor-pointer ${item?.volunteer.length == 0 && ('disabled:opacity-70 bg-gray-700')} font-noto rounded-[10px] h-[40px] w-[114px] text-center font-semibold bg-[#A77300] mt-[10px] py-2 pl-[16px] text-[16px]`}>
+                      <div onClick={() => handleHelp(item?.index)} className={`flex text-white cursor-pointer ${item?.volunteer.length == 0 && ('disabled:opacity-70 bg-gray-700')} font-noto hover:bg-gray-500 rounded-[10px] h-[40px] w-[114px] text-center font-semibold bg-[#A77300] mt-[10px] py-2 pl-[16px] text-[16px]`}>
                         {loading ? "Loading ..." : "Get Help"}
                       </div>
                     )}
                     {me?.role == "Host" && (
-                      <div onClick={() => handleVolun(item?.index)} className={`flex text-white cursor-pointer hover:bg-gray-700 font-noto rounded-[10px] h-[40px] w-[114px] text-center font-semibold bg-green-500 mt-[5px] py-2 pl-[16px] text-[16px]`}>
+                      <div onClick={() => handleVolun(item?.index)} className={`flex text-white cursor-pointer hover:bg-gray-500 font-noto rounded-[10px] h-[40px] w-[114px] text-center font-semibold bg-green-500 mt-[5px] py-2 pl-[16px] text-[16px]`}>
                         Volunteer
                       </div>
                     )}
@@ -131,7 +131,7 @@ const Campaigns = () => {
                   </div>
                 </div>
                   <div className='flex -mt-[40px] pr-12 w-full'>
-                    <div className='text-right text-[#817C7C] hover:text-green-500 hover:text-[16px] hover:text- text-[14px] ml-auto cursor-pointer'>{item?.volunteer.length} Volunteer</div>
+                    <div className='text-right text-[#817C7C] hover:text-green-500 hover:text-[16px] text-[14px] ml-auto cursor-pointer'>{item?.volunteer.length} Volunteer</div>
                   </div>
 
               </div>

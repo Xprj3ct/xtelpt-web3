@@ -119,12 +119,12 @@ const Checkschedule = () => {
                 <div className='justify-center items-center'> <p className='justify-center text-12 text-[#817C7C]'>{ethers.utils.formatEther(item?.fee)} Matic</p></div>
                 <div className=' items-center pr-7 justify-end'>
                   {me?.role == "User" ?
-                    <div onClick={() => handleCreate(item?.host, item?.index, item?.fee)} className={`text-white  cursor-pointer font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold bg-green-600  py-2 pl-5  text-[14px]`}>
-                      {loading ? "Loading ..." : "Book Session"}
+                    <div onClick={() => handleCreate(item?.host, item?.index, item?.fee)} className={`text-white hover:bg-gray-500 cursor-pointer font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold bg-green-600  py-2 pl-5  text-[14px]`}>
+                      Book Session
                     </div>
                     :
-                    <div className={`text-white disabled:opacity-70 bg-gray-700 font-noto rounded-[10px] h-[40px] w-[140px] text-center font-semibold py-2 pl-5  text-[14px]`}>
-                      {loading ? "Loading ..." : "Book Session"}
+                    <div className={`text-white disabled:opacity-70 bg-gray-700 font-noto rounded-[10px] h-[40px] hover:bg-gray-500 w-[140px] text-center font-semibold py-2 pl-5  text-[14px]`}>
+                      Book Session
                     </div>
                   }
                 </div></div>
