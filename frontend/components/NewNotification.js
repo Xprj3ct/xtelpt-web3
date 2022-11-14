@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { XContext } from '../../context/XContext';
+import { XContext } from '../context/XContext';
 import { ethers } from 'ethers'
 import moment from 'moment'
 

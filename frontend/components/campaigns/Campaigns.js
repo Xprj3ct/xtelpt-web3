@@ -59,10 +59,10 @@ const Campaigns = () => {
       console.log(getHelp)
       setClose(true)
 
-      router.push({
-        pathname: '/call',
-        query: { addr: me?.addr },
-      })
+      // router.push({
+      //   pathname: '/call',
+      //   query: { addr: me?.addr },
+      // })
 
     } catch (error) {
       console.log(error)

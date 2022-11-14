@@ -1,10 +1,8 @@
 import Image from 'next/image'
-import Profile from '../../assets/profle-p.png'
-import Notification from '../../container/notification'
 import { BsMicFill, BsSoundwave } from 'react-icons/bs'
 import { MdAddReaction, MdCable, MdCall } from 'react-icons/md'
 import React, { useEffect, useContext, useRef, useState } from "react";
-import { XContext } from "../../context/XContext";
+import { XContext } from "../context/XContext";
 import {
   HuddleClientProvider,
   getHuddleClient,
@@ -12,7 +10,7 @@ import {
 } from "@huddle01/huddle01-client";
 import PeerVideoAudioElem from "./PeerVideoAudioElem";
 import { useRouter } from 'next/router'
-import useProfile from '../../hooks/useProfile'
+import useProfile from '../hooks/useProfile'
 
 const Call = () => {
   const router = useRouter()
