@@ -57,7 +57,7 @@ const Host = () => {
 
   return (
     <div>
-      <div className='w-full bg-hero bg-left-4 bg-no-repeat flex-1'>
+      <div className='w-full bg-hero bg-left-4 bg-no-repeat bg-right flex-1'>
         <div className='font-bungee text-[34px] leading-[250px] flex  justify-between text-white pl-[286px]'>
           <div>TOP HOSTS:</div>
           <div className='mt-[100px] mr-[204px]'>
@@ -73,8 +73,9 @@ const Host = () => {
             </div>
           </div>
         </div>
-        <div className='grid place-items-center w-full'>
-          <div className='flex px-[265px] w-full justify-between pb-40'>
+        <div className='flex justify-center place-items-center w-full'>
+
+          <div className='px-[265px] grid grid-cols-2 gap-20 w-full justify-between pb-40'>
             {host?.map((item) => (
               <div key={item.addr} onClick={() => goToHost(item?.addr)} className='bg-[#2D1300] w-[350px] cursor-pointer h-[250px] shadow-[0_6px_10px_4px_rgba(0,0,0,0.5)] rounded-[30px] '>
                 <div className='grid place-items-center mt-10 w-full'>

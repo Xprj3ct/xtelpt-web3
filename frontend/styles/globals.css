@@ -10,10 +10,9 @@
 }
 
 .bg-hero {
-  /* width: 600px;
-  height: 485.6px; */
+  /* width: 100%; */
   background-image: url(../assets/XTELP\ T\ 1.png);
-  background-size: cover;
+  /* background-size: contain; */
 }
 
 @font-face {
@@ -137,4 +136,36 @@ ol {
 
 .host {
   height: 100vh;
+}
+
+.sticky-not {
+  top: 60px;
+  z-index: 9999;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+}
+
+.sticky-not>div {
+  justify-content: center;
+}
+
+.main-not {
+  display: none;
+}
+
+@media (max-width: 450px) {
+  .main-not {
+    top: 30%;
+    z-index: 9999;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .main-not>div {
+    height: 150px;
+    justify-content: center;
+  }
 }
