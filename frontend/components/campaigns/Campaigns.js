@@ -59,10 +59,10 @@ const Campaigns = () => {
       console.log(getHelp)
       setClose(true)
 
-      router.push({
-        pathname: '/call',
-        query: { addr: me?.addr },
-      })
+      // router.push({
+      //   pathname: '/call',
+      //   query: { addr: me?.addr },
+      // })
 
     } catch (error) {
       console.log(error)
@@ -130,11 +130,11 @@ const Campaigns = () => {
                     {/* <div className='text-right flex'>Voluteer</div> */}
                   </div>
                 </div>
-                {me?.role == "Host" && (
-                  <div className='flex -mt-[40px] pr-12 w-full'>
-                    <div className='text-right text-[#817C7C] hover:text-green-500 hover:text-[16px] hover:text- text-[14px] ml-auto cursor-pointer'>{item?.volunteer.length} Volunteer</div>
-                  </div>
-                )}
+
+                <div className='flex -mt-[40px] pr-12 w-full'>
+                  <div className='text-right text-[#817C7C] hover:text-green-500 hover:text-[16px] hover:text- text-[14px] ml-auto cursor-pointer'>{item?.volunteer.length} Volunteer</div>
+                </div>
+
 
               </div>
 

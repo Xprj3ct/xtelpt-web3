@@ -90,7 +90,7 @@ const Host = () => {
                     <div className='w-[5px] h-[5px] -mt-[2px]'>
                       <Image src={Ellipse} className='h-[5px] text-[#D9D9D9] w-[5px]' height={5} width={5} />
                     </div>
-                    <div className='text-white'>  Therapist</div>
+                    <div className='text-white'>  {item?.hostTitle}</div>
                   </div>
                   <div className='text-[10px] leading-[14px] mt-[15px] text-[#817C7C]'>{item.bio}</div>
                 </div>

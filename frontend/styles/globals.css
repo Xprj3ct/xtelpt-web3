@@ -150,22 +150,17 @@ ol {
   justify-content: center;
 }
 
+
 .main-not {
-  display: none;
+  top: 30%;
+  z-index: 9999;
+  position: fixed;
+  display: flex;
+  justify-content: center;
 }
 
-@media (max-width: 450px) {
-  .main-not {
-    top: 30%;
-    z-index: 9999;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-  }
 
-
-  .main-not>div {
-    height: 150px;
-    justify-content: center;
-  }
+.main-not>div {
+  height: 150px;
+  justify-content: center;
 }
