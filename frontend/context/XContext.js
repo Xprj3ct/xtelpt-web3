@@ -46,8 +46,11 @@ export const XProvider = ({ children }) => {
     }
   }
 
-  const connectWallet = async () => {
-    if (!window.ethereum) return setAppStatus('noMetaMask')
+    const connectWallet = async () => {
+    if (!window.ethereum) {
+      alert("Please Install MetaMask")
+      return
+    }
     try {
       setAppStatus('loading')
 

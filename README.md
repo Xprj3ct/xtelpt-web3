@@ -22,6 +22,11 @@
 # Frameworks & API's
 This <b>Project</b> was made possible with ```solidity```, ```hardhat```, ```chainlink```, ```quicknode```, ```IPFS```, ```NextJS```, ```HUDDLE01```, ```Polygon```, ```Git```, ```Chai```, ```EtherJS```, and ```Figma```. It's has features such as:
 
+- ```Chainlink Automation```: Was used to call the end schedule function which is to be called every 24hours we made use of the Time based trigger cron jobs on the chainlink automation interface
+Here is [link](https://automation.chain.link/mumbai/15126042871348539617950456361182166757342351262351933592710991110229343694907) to the chainlink automation:
+- ```IPFS```: Made use of pinata Ipfs API using file storage to save profile images and return a cid key in other to store on the Blockchain so I can retrieve the image at anytime for the account profile.
+- ```QuickNode```:  To help deploy my smart contract using the Polygon Mumbai test net on the blockchain, it is reliable scalable and work across all major blockchains.
+- ```Polygon```: Built on Polygon Chain.
 - Creating of user or in this case a client profile.
 - Creating of a host or doctors profile.
 - Ability for a host to create a meeting and a user to enter the meeting.
