@@ -119,7 +119,7 @@ const Campaigns = () => {
                   <div className='flex items-center w-full justify-center mt-[42px]'>
                     {me?.role == "User" && (
                       <div onClick={() => handleHelp(item?.index)} className={`flex text-white cursor-pointer ${item?.volunteer.length == 0 && ('disabled:opacity-70 bg-gray-700')} font-noto hover:bg-gray-500 rounded-[10px] h-[40px] w-[114px] text-center font-semibold bg-[#A77300] mt-[10px] py-2 pl-[16px] text-[16px]`}>
-                        {loading ? "Loading ..." : "Get Help"}
+                        Get Help
                       </div>
                     )}
                     {me?.role == "Host" && (
