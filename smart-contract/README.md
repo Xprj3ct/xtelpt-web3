@@ -28,7 +28,7 @@ This <b>smart contract</b> was written with ```solidity```, ```hardhat```, ```ch
 We made use of pinata IPFS API using file storage to save profile images and return a cid key in other to store on the blockchain so I can retrieve the image at anytime for the account profile.
 ### Chanlink Automation
 Chainlink automation is used to call the end meeting function which is to be called every 24hours I made use of the Time based trigger cron jobs on the chainlink automation interface
-Here is link to the chainlink automation: https://automation.chain.link/mumbai/15126042871348539617950456361182166757342351262351933592710991110229343694907
+Here is link to the chainlink automation: https://automation.chain.link/mumbai/41752764193460630660259591557567796324121401828891767850615051925910905870876
 ### QuickNode
 I used quicknode API to help deploy my smart contract using the Polygon Mumbai test net on the blockchain, it is reliable scalable and work across all major blockchains 
 
@@ -91,7 +91,7 @@ endCampaign(address _user, uint256 _id)
 ```
 ### 8.  End meeting function called by chainlink automation
 This is the ```chainlink``` automation function which is called every 24hrs.
-<a href="https://automation.chain.link/mumbai/15126042871348539617950456361182166757342351262351933592710991110229343694907" target="_blank">Link</a> to the automation 
+<a href="https://automation.chain.link/mumbai/41752764193460630660259591557567796324121401828891767850615051925910905870876" target="_blank">Link</a> to the automation 
 ```
 function endMeeting() public {
         for (uint i = 0; i < AllAccount.length; i++) {
