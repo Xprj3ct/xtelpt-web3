@@ -1,11 +1,3 @@
-/**
- *Submitted for verification at polygonscan.com on 2022-11-12
-*/
-
-/**
- *Submitted for verification at polygonscan.com on 2022-11-04
-*/
-
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.7;
@@ -13,7 +5,7 @@ pragma solidity ^0.8.7;
 // import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
 contract XTELPT  {
-    address owner;
+    address public owner;
 
     enum XTELPState {
         OPEN,
@@ -32,11 +24,9 @@ contract XTELPT  {
 
 
     /* Campaign and Meeting variables */
-
     mapping(address => meeting[]) public Meeting;
 
     campaign [] public Campaign;
-
 
     uint256 public campaignIndex;
     
@@ -189,8 +179,6 @@ contract XTELPT  {
      * after which the meeting ID is specified and the user would be assigned to the meeting
      */
     function joinMeeting(address _host, uint256 _id) public payable onlyUser {
-        require(msg.value >= Meeting[_host][_id].fee, "Insufficient amount");
-
         Meeting[_host][_id].user = payable(msg.sender);
         Meeting[_host][_id].booked = true;
     } 
@@ -250,6 +238,7 @@ contract XTELPT  {
             for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) { 
                 Meeting[AllAccount[i]][j].completed = true;
                 lastTimeStamp = block.timestamp;
+                Meeting[AllAccount[i]][j].host.transfer(Meeting[AllAccount[i]][j].fee);
             }
         }
     }

@@ -98,6 +98,7 @@ function endMeeting() public {
             for (uint j = 0; j < Meeting[AllAccount[i]].length; j++) { 
                 Meeting[AllAccount[i]][j].completed = true;
                 lastTimeStamp = block.timestamp;
+                Meeting[AllAccount[i]][j].host.transfer(Meeting[AllAccount[i]][j].fee);
             }
         }
     }
