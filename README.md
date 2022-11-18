@@ -23,7 +23,7 @@
 This <b>Project</b> was made possible with ```solidity```, ```hardhat```, ```chainlink```, ```quicknode```, ```IPFS```, ```NextJS```, ```HUDDLE01```, ```Polygon```, ```Git```, ```Chai```, ```EtherJS```, and ```Figma```. It's has features such as:
 
 - ```Chainlink Automation```: Was used to call the end schedule function which is to be called every 24hours we made use of the Time based trigger cron jobs on the chainlink automation interface
-Here is [link](https://automation.chain.link/mumbai/41752764193460630660259591557567796324121401828891767850615051925910905870876) to the chainlink automation:
+Here is [link](https://automation.chain.link/mumbai/70900495728458583747083971780494625056575569558419502594231042870192427479799) to the chainlink automation:
 - ```IPFS```: Made use of pinata Ipfs API using file storage to save profile images and return a cid key in other to store on the Blockchain so I can retrieve the image at anytime for the account profile.
 - ```QuickNode```:  To help deploy my smart contract using the Polygon Mumbai test net on the blockchain, it is reliable scalable and work across all major blockchains.
 - ```Polygon```: Built on Polygon Chain.
@@ -39,7 +39,7 @@ Here is [link](https://automation.chain.link/mumbai/4175276419346063066025959155
 
 ### LINKS 
 [Live Deployed](https://xtelpt-web3.vercel.app/) <br/>
-[Contract](https://mumbai.polygonscan.com/address/0x7Ecf99Aa766083096c5B9f237BD16B7177da0158)
+[Contract](https://mumbai.polygonscan.com/address/0x47FB47a5136d40c55E591CA87963Aeb700f999de)
 > **Note**
 > Wallet must be Connected to access any feature.
 > Currently on ```Mumbai Faucet```.

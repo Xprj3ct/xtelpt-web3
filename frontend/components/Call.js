@@ -20,6 +20,8 @@ const Call = () => {
   const [hostProfile] = useProfile(router.query.hostAddr)
   const [userProfile] = useProfile(router.query.userAddr)
 
+  const type = router.query.type
+
 
   const { currentAccount } = useContext(XContext)
   const huddleClient = getHuddleClient("i4pzqbpxza8vpijQMwZsP1H7nZZEHOTN3vR4NdNS");
@@ -93,7 +95,26 @@ const Call = () => {
               <BsMicFill onClick={handleJoin} title="Opens a meeting room " className='text-[#ACACAC] cursor-pointer mr-7 h-6 w-6' />
 
               <MdCable onClick={() => huddleClient.allowAllLobbyPeersToJoinRoom()} title="Allow peer" className='text-[#ACACAC] cursor-pointer mr-7 h-6 w-6' />
-              <MdCall className='text-white ml-10 bg-red-700 rounded-full border-2 p-1 border-white cursor-pointer h-7 w-7 ' title='End call' onClick={() => pauseTracks()} />
+              {type == "Camp" ? (
+                <>
+                  {me?.role == "User" ? (
+                    <MdCall className='text-white ml-10 bg-red-700 rounded-full border-2 p-1 border-white cursor-pointer h-7 w-7 ' title='End call' onClick={() => pauseTracks()} />
+                  ) : (
+                    <MdCall className='text-white ml-10 bg-gray-700 disabled:opacity-70 rounded-full border-2 p-1 border-white cursor-pointer h-7 w-7 ' title='End call' onClick={() => pauseTracks()} />
+                  )}
+
+                </>
+
+              ) : (
+                <>
+                  {me?.role == "Host" ? (
+                    <MdCall className='text-white ml-10 bg-red-700 rounded-full border-2 p-1 border-white cursor-pointer h-7 w-7 ' title='End call' onClick={() => pauseTracks()} />
+                  ) : (
+                    <MdCall className='text-white ml-10 bg-gray-700 disabled:opacity-70 rounded-full border-2 p-1 border-white cursor-pointer h-7 w-7 ' title='End call' onClick={() => pauseTracks()} />
+                  )}
+
+                </>
+              )}
             </div>
           </div>
         </div>

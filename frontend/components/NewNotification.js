@@ -50,6 +50,7 @@ const NewNotification = () => {
       setCampaign(arr2)
     }
 
+
   }
 
   const updateUIHostValues = async () => {
@@ -88,6 +89,7 @@ const NewNotification = () => {
       setHostCampaign(arr2)
     }
 
+
   }
 
   useEffect(() => {
@@ -119,7 +121,7 @@ const NewNotification = () => {
                     <span
                       onClick={() => router.push({
                         pathname: '/call',
-                        query: { hostAddr: item?.host, userAddr: item?.user },
+                        query: { type: "Meet", hostAddr: item?.host, userAddr: item?.user },
                       })} className='bg-[#6BE42B] mt-2 text-center hover:cursor-pointer w-[56px] py-[5px] text-[12px] mr-2 rounded-[7px] h-[28px]'>
                       Join
                     </span>
@@ -133,7 +135,7 @@ const NewNotification = () => {
                     <span
                       onClick={() => router.push({
                         pathname: '/call',
-                        query: { hostAddr: item?.vol, userAddr: item?.user },
+                        query: { type: "Camp", hostAddr: item?.vol, userAddr: item?.user },
                       })} className='bg-[#6BE42B] mt-2 text-center hover:cursor-pointer w-[56px] py-[5px] text-[12px] mr-2 rounded-[7px] h-[28px]'>
                       Join
                     </span>
@@ -156,7 +158,7 @@ const NewNotification = () => {
                     <span
                       onClick={() => router.push({
                         pathname: '/call',
-                        query: { hostAddr: item?.host, userAddr: item?.user },
+                        query: { type: "Meet", hostAddr: item?.host, userAddr: item?.user },
                       })} className='bg-[#6BE42B] mt-2 text-center hover:cursor-pointer w-[56px] py-[5px] text-[12px] ml-2 mr-2 rounded-[7px] h-[28px]'>
                       Start
                     </span>
@@ -171,7 +173,7 @@ const NewNotification = () => {
                     <span
                       onClick={() => router.push({
                         pathname: '/call',
-                        query: { hostAddr: item?.vol, userAddr: item?.user },
+                        query: { type: "Camp", hostAddr: item?.vol, userAddr: item?.user },
                       })} className='bg-[#6BE42B] mt-2 text-center hover:cursor-pointer w-[56px] py-[5px] text-[12px] mr-2 rounded-[7px] h-[28px]'>
                       Join
                     </span>

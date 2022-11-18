@@ -326,11 +326,6 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint256",
-                "name": "_fee",
-                "type": "uint256"
-            },
-            {
                 "internalType": "string",
                 "name": "_desc",
                 "type": "string"
@@ -628,6 +623,25 @@
     {
         "inputs": [
             {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+            }
+        ],
+        "name": "isUser",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "uint256",
                 "name": "_id",
                 "type": "uint256"
@@ -653,7 +667,7 @@
         ],
         "name": "joinMeeting",
         "outputs": [],
-        "stateMutability": "payable",
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
